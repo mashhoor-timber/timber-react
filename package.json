@@ -1,0 +1,71 @@
+{
+  "name": "timber-react",
+  "version": "0.0.1",
+  "description": "Timber UI Library - Reusable React",
+  "keywords": [
+    "timber-react",
+    "timber-ui"
+  ],
+  "homepage": "https://github.com/mashhoor-timber/timber-react#readme",
+  "bugs": {
+    "url": "https://github.com/mashhoor-timber/timber-react/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mashhoor-timber/timber-react.git"
+  },
+  "license": "MIT",
+  "author": "mashhoor-timber",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md",
+    "CHANGELOG.md"
+  ],
+  "scripts": {
+    "build": "rollup -c",
+    "build:watch": "rollup -c -w",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
+    "test": "jest",
+    "lint": "eslint src --ext .ts,.tsx",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@heroui/react": "^2.0.0",
+    "@hookform/resolvers": "^5.1.1",
+    "@rollup/plugin-terser": "^0.4.4",
+    "@tanstack/react-query": "^4.0.0",
+    "clsx": "^2.0.0",
+    "date-fns": "^2.0.0",
+    "formik": "^2.0.0",
+    "postcss": "^8.5.6",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "react-hook-form": "^7.59.0",
+    "rollup-plugin-dts": "^6.2.1",
+    "tailwind-merge": "^2.0.0",
+    "yup": "^1.6.1"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^24.0.0",
+    "@rollup/plugin-node-resolve": "^15.0.0",
+    "@rollup/plugin-typescript": "^11.0.0",
+    "@storybook/addon-essentials": "^7.0.0",
+    "@storybook/react": "^7.0.0",
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
+    "rollup": "^3.0.0",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "rollup-plugin-postcss": "^4.0.2",
+    "typescript": "^5.0.0"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "eslint --fix",
+      "git add"
+    ]
+  }
+}
