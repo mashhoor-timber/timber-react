@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { ModalProps, Modal as NextModal, Image } from '@heroui/react';
 import clsx from 'clsx';
 
-import crossIcon from '@assets/icons/cross.svg';
+import crossIcon from '../../../assets/icons/cross.svg';
 // import { useDirection } from '@hooks/useDirection';
 
 export default function Modal({ children, ...props }: ModalProps) {

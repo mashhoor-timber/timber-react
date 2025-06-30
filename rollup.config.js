@@ -7,6 +7,8 @@ import postcss from 'rollup-plugin-postcss';
 import svgr from '@svgr/rollup';
 import dts from 'rollup-plugin-dts';
 import { readFileSync } from 'fs';
+import { createFilter } from '@rollup/pluginutils';
+import strip from '@rollup/plugin-strip';
 
 const packageJson = JSON.parse(readFileSync('./package.json', 'utf8'));
 
@@ -16,20 +18,35 @@ export default [
     input: 'src/index.ts',
     output: [
       {
-        file: packageJson.main,
+        file: 'dist/cjs/index.js',
         format: 'cjs',
         sourcemap: true,
         exports: 'named',
       },
       {
-        file: packageJson.module,
+        file: 'dist/esm/index.js',
         format: 'esm',
         sourcemap: true,
       },
     ],
     plugins: [
+      {
+        name: 'strip-use-client',
+        transform(code, id) {
+          if (
+            /node_modules\/.*\.(js|mjs)$/.test(id) &&
+            code.includes('"use client"')
+          ) {
+            return {
+              code: code.replace(/["']use client["'];?/g, ''),
+              map: null,
+            };
+          }
+          return null;
+        },
+      },
       peerDepsExternal(),
-        svgr(),
+      svgr(),
       resolve({
         browser: true,
         preferBuiltins: false,
@@ -46,28 +63,43 @@ export default [
         minimize: true,
       }),
       terser(),
+      strip({
+        include: ['**/node_modules/@heroui/**/*.js', '**/node_modules/@heroui/**/*.mjs'],
+        functions: [],
+        labels: [],
+        sourceMap: true,
+      }),
     ],
     external: [
       'react',
       'react-dom',
+      'framer-motion',
       '@heroui/react',
       '@tanstack/react-query',
       'formik',
       'date-fns',
       '@internationalized/date',
       'yup',
+      'tailwindcss'
     ],
+    onwarn(warning, warn) {
+      if (
+        warning.code === 'MODULE_LEVEL_DIRECTIVE' &&
+        /use client/.test(warning.message)
+      ) {
+        return;
+      }
+      warn(warning);
+    },
   },
   // Types build
-{
-  input: 'dist/types/index.d.ts', // input from tsc's output
-  output: {
-    file: 'dist/index.d.ts', // output that rollup will bundle
-    format: 'esm',
-  },
-  plugins: [dts()],
-  external: [/\.css$/, /\.scss$/],
-}
-
-
+  {
+    input: 'src/index.ts',
+    output: {
+      file: 'dist/types/index.d.ts',
+      format: 'esm',
+    },
+    plugins: [dts()],
+    external: [/\.css$/, /\.scss$/],
+  }
 ];

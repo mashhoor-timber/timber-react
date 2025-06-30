@@ -7,7 +7,7 @@ export interface ExpenseFormData {
   payment_method: string;
   currency: string;
   amount: number;
-  date: string;
+  date: CalendarDate | string;
   id?: string;
   company?: string;
 }
@@ -64,7 +64,7 @@ export interface AddExpenseFormProps {
 
   // Customization options
   customPaymentMethods?: AccountOption[];
-  customCurrencyOptions?:CurrencyOption[];
+  customCurrencyOptions?: CurrencyOption[];
   hideWafeqIntegration?: boolean;
   hideZohoIntegration?: boolean;
   defaultCurrency?: string;

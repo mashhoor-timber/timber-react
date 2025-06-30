@@ -39,7 +39,7 @@ export const AddExpenseForm: React.FC<AddExpenseFormProps> = ({
     amount: 0,
     category: "",
     merchant: "",
-    date: today(getLocalTimeZone()).toString(),
+    date: today(getLocalTimeZone()),
     currency: "",
   };
 
@@ -100,6 +100,8 @@ export const AddExpenseForm: React.FC<AddExpenseFormProps> = ({
             labelPlacement="outside-left"
             name="amount"
             placeholder="Enter amount"
+            formLib="rhf"
+            control={methods.control}
           />
 
           {/*           
