@@ -7,7 +7,7 @@ export interface ExpenseFormData {
   payment_method: string;
   currency: string;
   amount: number;
-  date: CalendarDate;
+  date: string;
   id?: string;
   company?: string;
 }

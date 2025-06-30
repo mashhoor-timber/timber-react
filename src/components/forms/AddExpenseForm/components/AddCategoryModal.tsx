@@ -1,15 +1,11 @@
 import { Divider, Spacer } from '@heroui/react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Form, Formik } from 'formik';
-import { useTranslation } from 'react-i18next';
-import { toast } from 'sonner';
 
 import Button from '@components/atomic/Button';
 import Input from '@components/atomic/Input';
 import Modal, { ModalBody, ModalContent, ModalFooter, ModalHeader } from '@components/atomic/Modal';
-import { useAppSelector } from '@hooks/store';
 
-import { addExpenseCategory } from '../api/expenseApi';
 import { expenseCategorySchema } from '../schema';
 
 type AddCategoryModalProps = {
@@ -19,33 +15,37 @@ type AddCategoryModalProps = {
 
 export default function AddCategoryModal({ isOpen, onClose }: AddCategoryModalProps) {
     const queryClient = useQueryClient();
-    const { t } = useTranslation();
-    const { mutate, isPending } = useMutation({
-        mutationFn: addExpenseCategory,
-        onSuccess: res => {
-            toast.success(t('modal.add_category.form.toast', { ns: 'expense' }));
-            queryClient.invalidateQueries({ queryKey: ['getCategories'] });
-            onClose();
-        },
-        onError: (error: any) => {
-            const message = error?.response?.data?.message || 'Something went wrong';
-            toast.error(message);
-        },
-    });
 
-    const company = useAppSelector(state => state.company);
+    // const { mutate, isPending } = useMutation({
+    //     mutationFn: addExpenseCategory,
+    //     onSuccess: res => {
+    //         toast.success(`Category added successfully`);
+    //         queryClient.invalidateQueries({ queryKey: ['getCategories'] });
+    //         onClose();
+    //     },
+    //     onError: (error: any) => {
+    //         const message = error?.response?.data?.message || 'Something went wrong';
+    //         toast.error(message);
+    //     },
+    // });
+
+    const handleSubmit = async (values: any) => {
+        //todo
+    }
+
+    const company = "" //todo
     return (
         <Modal isOpen={isOpen} size="xl" onOpenChange={onClose}>
             <ModalContent>
-                <ModalHeader>{t('modal.add_category.title', { ns: 'expense' })}</ModalHeader>
+                <ModalHeader>Add New Category</ModalHeader>
                 <Formik
                     initialValues={{
-                        company: company._id,
+                        company: company,
                         category: '',
                     }}
                     validationSchema={expenseCategorySchema}
                     onSubmit={values => {
-                        mutate(values);
+                       handleSubmit(values);
                     }}
                 >
                     {({ submitForm, isValid }) => (
@@ -53,11 +53,9 @@ export default function AddCategoryModal({ isOpen, onClose }: AddCategoryModalPr
                             <ModalBody>
                                 <Input
                                     isRequired
-                                    label={t('modal.add_category.form.label', { ns: 'expense' })}
+                                    label="Category"
                                     name="category"
-                                    placeholder={t('modal.add_category.form.placeholder', {
-                                        ns: 'expense',
-                                    })}
+                                    placeholder="Enter category"
                                 />
                             </ModalBody>
                             <ModalFooter>
@@ -66,15 +64,15 @@ export default function AddCategoryModal({ isOpen, onClose }: AddCategoryModalPr
                                     <Spacer y={4} />
                                     <div className="flex justify-end gap-2">
                                         <Button color="white" variant="light" onPress={onClose}>
-                                            {t('modal.add_category.form.cancel', { ns: 'expense' })}
+                                            Cancel
                                         </Button>
                                         <Button
                                             color="primary"
                                             isDisabled={!isValid}
-                                            isLoading={isPending}
+                                            // isLoading={isPending}
                                             type="submit"
                                         >
-                                            {t('modal.add_category.form.submit', { ns: 'expense' })}
+                                            Submit
                                         </Button>
                                     </div>
                                 </div>

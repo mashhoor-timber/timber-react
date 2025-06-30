@@ -16,7 +16,7 @@ interface Props extends Omit<AutocompleteProps, "children"> {
   buttonOnClick: () => void;
   queryKey: string;
   buttonText?: string;
-  onSelChange?: (value: ExpenseCategory | undefined) => void;
+  onSelChange?: (value: any) => void;
   selectedKey?: string | null;
 }
 
@@ -31,14 +31,16 @@ export default function SelectCategory({
   const [selected, setSelected] = useState<string | null>(selectedKey || null);
   const [query, setQuery] = useState("");
 
-  const {
-    data: expenseCategoryData,
-    isError,
-    isFetching,
-  } = useQuery({
-    queryKey: ["getCategories"],
-    queryFn: () => expenseCategory({ company: company?._id, search: query }),
-  });
+  // const {
+  //   data: expenseCategoryData,
+  //   isError,
+  //   isFetching,
+  // } = useQuery({
+  //   queryKey: ["getCategories"],
+  //   queryFn: () => expenseCategory({ company: company?._id, search: query }),
+  // });
+
+  const expenseCategoryData: never[] = []
 
   // Map categories to match the `ExpenseCategory` type
   const categoryOptions = [
@@ -62,15 +64,15 @@ export default function SelectCategory({
       label: "Marketing",
       value: "marketing",
     },
-    ...(expenseCategoryData?.expense_categories?.map((item: any) => ({
-      key: item.category?.value,
-      label: item.category?.label,
-      value: item.category?.value,
-    })) || []),
+    // ...(expenseCategoryData?.expense_categories?.map((item: any) => ({
+    //   key: item.category?.value,
+    //   label: item.category?.label,
+    //   value: item.category?.value,
+    // })) || []),
   ];
 
   const renderItems: any = () => {
-    if (isError || !categoryOptions.length) return [];
+    if ( !categoryOptions.length) return [];
     return categoryOptions.map((item) => (
       <AutocompleteItem
         key={item.value}
@@ -101,7 +103,7 @@ export default function SelectCategory({
           label: "font-medium",
         },
       }}
-      isLoading={isFetching}
+      // isLoading={isFetching}
       label={props.label}
       labelPlacement="outside"
       placeholder={props.placeholder}

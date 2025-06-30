@@ -4,6 +4,7 @@ import typescript from '@rollup/plugin-typescript';
 import terser from '@rollup/plugin-terser';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import postcss from 'rollup-plugin-postcss';
+import svgr from '@svgr/rollup';
 import dts from 'rollup-plugin-dts';
 import { readFileSync } from 'fs';
 
@@ -28,6 +29,7 @@ export default [
     ],
     plugins: [
       peerDepsExternal(),
+        svgr(),
       resolve({
         browser: true,
         preferBuiltins: false,
@@ -57,10 +59,15 @@ export default [
     ],
   },
   // Types build
-  {
-    input: 'dist/index.d.ts',
-    output: [{ file: 'dist/index.d.ts', format: 'esm' }],
-    plugins: [dts()],
-    external: [/\.css$/],
+{
+  input: 'dist/types/index.d.ts', // input from tsc's output
+  output: {
+    file: 'dist/index.d.ts', // output that rollup will bundle
+    format: 'esm',
   },
+  plugins: [dts()],
+  external: [/\.css$/, /\.scss$/],
+}
+
+
 ];

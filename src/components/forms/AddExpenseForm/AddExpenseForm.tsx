@@ -39,7 +39,7 @@ export const AddExpenseForm: React.FC<AddExpenseFormProps> = ({
     amount: 0,
     category: "",
     merchant: "",
-    date: today(getLocalTimeZone()),
+    date: today(getLocalTimeZone()).toString(),
     currency: "",
   };
 
@@ -62,7 +62,7 @@ export const AddExpenseForm: React.FC<AddExpenseFormProps> = ({
 
   const methods = useForm({
     defaultValues: initialValues,
-    resolver: yupResolver<any>(validationSchema),
+    // resolver: yupResolver<any>(validationSchema),
     mode: "onTouched",
     reValidateMode: "onChange",
     shouldFocusError: true,
@@ -145,7 +145,7 @@ export const AddExpenseForm: React.FC<AddExpenseFormProps> = ({
           onClose={similarExpenseModal.onClose}
           onConfirm={() => {
             if (pendingExpense) {
-              handleSubmit(pendingExpense);
+              handleSubmit(pendingExpense, true);
               similarExpenseModal.onClose();
             }
           }}
