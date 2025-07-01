@@ -1,4 +1,5 @@
 
+import './styles/index.css';
 export { AddExpenseForm } from './components/forms/AddExpenseForm';
 export type { 
   AddExpenseFormProps, 

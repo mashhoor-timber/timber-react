@@ -1,0 +1,97 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Inter";
+  src: url("./assets/fonts/Inter-VariableFont_opsz,wght.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+}
+
+html {
+  scrollbar-width: thin;
+  scrollbar-color: #cccccc #00000000;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+}
+
+/* Remove default search input styles */
+[type="search"]::-webkit-search-decoration,
+[type="search"]::-webkit-search-cancel-button {
+  appearance: none;
+}
+
+/* ::-ms-reveal {
+    display: none;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #cccccc;
+    border-radius: 3.25rem;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #999999;
+} */
+
+.scrollbar-thin {
+  scrollbar-width: thin;
+  scrollbar-color: #eee #00000000;
+}
+
+.remote-video-container {
+  position: absolute;
+  inset: 0;
+  background-color: #000;
+  object-fit: contain;
+}
+
+.fullscreen-video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999; /* Ensure it's above other content */
+  background-color: black; /* Optional: Black background */
+}
+
+.brd {
+  border: 1px solid red;
+}
+
+@keyframes appearance-in-table-row {
+  0% {
+    opacity: 0;
+    transform: translateZ(0) scale(0.99);
+  }
+  5% {
+    opacity: 0.75;
+    backface-visibility: hidden;
+    webkit-font-smoothing: antialiased;
+    transform: translateZ(0) scale(1.01);
+  }
+  8% {
+    opacity: 1;
+    transform: translateZ(0) scale(1);
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+.animate-appearance-in-table-row {
+  animation: appearance-in-table-row 6000ms ease-out normal both;
+}
+svg {
+  display: inline-block;
+  vertical-align: middle;
+}

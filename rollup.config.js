@@ -57,7 +57,7 @@ export default [
         exclude: ['**/*.stories.tsx', '**/*.test.tsx', '**/*.spec.tsx'],
       }),
       postcss({
-        extract: false,
+        extract: 'style.css',
         modules: false,
         use: ['sass'],
         minimize: true,
