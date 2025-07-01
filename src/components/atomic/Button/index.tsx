@@ -1,4 +1,23 @@
-import { extendVariants, Button as NextButton } from "@heroui/react";
+import {
+  extendVariants,
+  Button as NextButton,
+} from "@heroui/react";
+
+import { ComponentProps } from "react";
+
+// Redefine custom color, variant, size, radius types
+type CustomColor = "white" | "primary" | "secondary" | "text" | "transparent" | "icon";
+type CustomVariant = "light" | "solid" | "bordered" | "flat" | "faded" | "shadow" | "ghost";
+type CustomSize = "xs" | "sm" | "md" | "lg" | "xl" | "fit";
+type CustomRadius = "full" | "medium" | "small";
+
+// Extend original props, but override specific ones
+type CustomButtonProps = Omit<ComponentProps<typeof NextButton>, "color" | "size" | "radius" | "variant"> & {
+  color?: CustomColor;
+  variant?: CustomVariant;
+  size?: CustomSize;
+  radius?: CustomRadius;
+};
 
 const Button = extendVariants(NextButton, {
   variants: {
@@ -29,8 +48,8 @@ const Button = extendVariants(NextButton, {
   defaultVariants: {
     color: "white",
     size: "lg",
-    radius: "lg",
+    radius: "medium",
   },
-});
+}) as React.ComponentType<CustomButtonProps>;
 
 export default Button;

@@ -52,11 +52,11 @@ export default function AddCategoryModal({
             category: "",
           }}
           validationSchema={expenseCategorySchema}
-          onSubmit={(values) => {
+          onSubmit={(values: any) => {
             handleSubmit(values);
           }}
         >
-          {({ submitForm, isValid }) => (
+          {({ submitForm, isValid }:any) => (
             <Form className="">
               <ModalBody>
                 <Input
