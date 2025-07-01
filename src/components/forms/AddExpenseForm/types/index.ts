@@ -52,16 +52,6 @@ export interface AddExpenseFormProps {
   onSuccess?: () => void;
   onError?: (error: Error) => void;
 
-  // Data providers (optional - for custom implementations)
-  expenseCategoryProvider?: (
-    companyId?: string,
-    search?: string
-  ) => Promise<any>;
-  expenseSubCategoryProvider?: (category: string) => Promise<any>;
-  bankAccountProvider?: (senderId: string) => Promise<any>;
-  zohoAccountProvider?: (senderId: string) => Promise<any>;
-  wafeqAccountProvider?: (senderId: string) => Promise<any>;
-
   // Customization options
   customPaymentMethods?: AccountOption[];
   customCurrencyOptions?: CurrencyOption[];

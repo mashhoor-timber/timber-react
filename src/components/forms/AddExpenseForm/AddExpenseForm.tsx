@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDisclosure } from "@heroui/react";
+import { Spacer, useDisclosure } from "@heroui/react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { getLocalTimeZone, today } from "@internationalized/date";
 import { FormProvider, useForm } from "react-hook-form";
@@ -9,9 +9,8 @@ import DatePicker from "../../atomic/DatePicker";
 import Input from "../../atomic/Input";
 import SelectInputWithSearch from "../../atomic/SelectInputWithSearch";
 
-import { useTimberQuery } from "../../../hooks/useTimberQuery";
 import { defaultExpenseSchema } from "../../../utils/validation";
-import { DEFAULT_PAYMENT_METHODS, DEFAULT_CATEGORIES } from "./constants";
+import { DEFAULT_PAYMENT_METHODS, DEFAULT_CURRENCIES } from "./constants";
 import { AddExpenseFormProps, ExpenseFormData } from "./types";
 import ChooseCategory from "./components/ChooseCategory";
 import ConfirmModal from "./components/ConfirmModal";
@@ -62,7 +61,7 @@ export const AddExpenseForm: React.FC<AddExpenseFormProps> = ({
 
   const methods = useForm({
     defaultValues: initialValues,
-    // resolver: yupResolver<any>(validationSchema),
+    resolver: yupResolver(validationSchema),
     mode: "onTouched",
     reValidateMode: "onChange",
     shouldFocusError: true,
@@ -74,45 +73,41 @@ export const AddExpenseForm: React.FC<AddExpenseFormProps> = ({
       <FormProvider {...methods}>
         <div className="space-y-3">
           <Input isRequired formLib="rhf" name="type" placeholder="Type" />
+          <Spacer y={3} />
           <Input
             isRequired
             formLib="rhf"
             name="merchant"
             placeholder="Merchant"
           />
+          <Spacer y={3} />
 
           <ChooseCategory key={formKey} addCategoryModal={addCategoryModal} />
+          <Spacer y={3} />
 
           <SelectInputWithSearch
             key={`${formKey}payment`}
             isRequired
             formType="rhf"
             name="payment_method"
-            options={customPaymentMethods || []}
+            options={customPaymentMethods || DEFAULT_PAYMENT_METHODS || []}
             placeholder="Payment Method"
           />
+          <Spacer y={3} />
 
-          <CurrencyInput
-            currencyName="currency"
-            defaultCurrency={defaultCurrency}
-            currencyOptions={customCurrencyOptions || []}
-            label="Amount"
-            labelPlacement="outside-left"
-            name="amount"
-            placeholder="Enter amount"
-            formLib="rhf"
-            control={methods.control}
-          />
-
-          {/*           
           <Input
             isRequired
-            endContent={<span className="text-xs text-default-500">"AED"</span>}
+            endContent={
+              <span className="text-xs text-default-500">
+                {defaultCurrency || "AED"}
+              </span>
+            }
             formLib="rhf"
             name="amount"
-            placeholder="Amount"
+            placeholder="Enter amount"
             type="number"
-          /> */}
+          />
+          <Spacer y={3} />
 
           <DatePicker
             disableFutureDates
@@ -120,7 +115,7 @@ export const AddExpenseForm: React.FC<AddExpenseFormProps> = ({
             formType="rhf"
             name="date"
           />
-
+          <Spacer y={3} />
           <Button
             fullWidth
             color="primary"

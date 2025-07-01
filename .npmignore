@@ -3,4 +3,5 @@ src/
 
 .DS_Store
 
+.storybook/
 tsconfig.json

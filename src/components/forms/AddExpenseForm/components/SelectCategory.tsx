@@ -5,12 +5,11 @@ import {
   AutocompleteItem,
   AutocompleteProps,
   AutocompleteSection,
-  Image,
 } from "@heroui/react";
-import { useQuery } from "@tanstack/react-query";
 
 import CategoriesIcon from "../../../../assets/icons/categories.svg";
 import { ExpenseCategory } from "../types";
+import { ReactSVG } from "react-svg";
 
 interface Props extends Omit<AutocompleteProps, "children"> {
   buttonOnClick: () => void;
@@ -40,7 +39,7 @@ export default function SelectCategory({
   //   queryFn: () => expenseCategory({ company: company?._id, search: query }),
   // });
 
-  const expenseCategoryData: never[] = []
+  const expenseCategoryData: never[] = [];
 
   // Map categories to match the `ExpenseCategory` type
   const categoryOptions = [
@@ -72,7 +71,7 @@ export default function SelectCategory({
   ];
 
   const renderItems: any = () => {
-    if ( !categoryOptions.length) return [];
+    if (!categoryOptions.length) return [];
     return categoryOptions.map((item) => (
       <AutocompleteItem
         key={item.value}
@@ -134,7 +133,12 @@ export default function SelectCategory({
           textValue="add_category"
         >
           <div className="flex items-center text-primary font-medium px-2 gap-2">
-            <Image src={CategoriesIcon} height={24} width={24} />
+            {/* <ReactSVG
+              src={CategoriesIcon}
+              className="text-primary"
+              height={24}
+              width={24}
+            /> */}
             <span className="font-medium">{buttonText}</span>
           </div>
         </AutocompleteItem>

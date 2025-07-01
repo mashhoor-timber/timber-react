@@ -41,6 +41,7 @@ function FormikCurrencyInput({
                 props.labelPlacement === "outside-left" ? "h-[42px]" : ""
               }`,
               base: `${props.labelPlacement === "outside-left" ? "" : ""}`,
+              errorMessage: "text-start",
             }}
             errorMessage={error as string}
             isInvalid={!!error}

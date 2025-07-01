@@ -29,4 +29,7 @@ module.exports = {
       statements: 80,
     },
   },
+  moduleNameMapper: {
+    '\\.svg$': '<rootDir>/__mocks__/svgMock.js',
+  },
 };

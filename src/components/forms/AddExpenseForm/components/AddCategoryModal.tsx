@@ -1,5 +1,4 @@
 import { Divider, Spacer } from "@heroui/react";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Form, Formik } from "formik";
 
 import Button from "@components/atomic/Button";
@@ -22,7 +21,6 @@ export default function AddCategoryModal({
   isOpen,
   onClose,
 }: AddCategoryModalProps) {
-  const queryClient = useQueryClient();
 
   // const { mutate, isPending } = useMutation({
   //     mutationFn: addExpenseCategory,
@@ -56,7 +54,7 @@ export default function AddCategoryModal({
             handleSubmit(values);
           }}
         >
-          {({ submitForm, isValid }:any) => (
+          {({ submitForm, isValid }: any) => (
             <Form className="">
               <ModalBody>
                 <Input

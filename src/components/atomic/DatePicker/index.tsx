@@ -13,6 +13,7 @@ import { Field, FieldProps } from "formik";
 import { useController, useFormContext } from "react-hook-form";
 
 import CalendarIcon from "../../../assets/icons/calendar.svg";
+import { ReactSVG } from "react-svg";
 
 // Define a more specific type for the DatePicker props
 type DatePickerValue = ZonedDateTime | CalendarDate | CalendarDateTime | null;
@@ -87,6 +88,7 @@ function FormikDatePicker({
               base: "gap-1",
               inputWrapper: `h-[42px] border border-divider px-4 mt-0 pt-0`,
               label: "font-medium",
+              errorMessage: "text-start",
             }}
             errorMessage={error as string}
             isDateUnavailable={(date) =>
@@ -100,7 +102,9 @@ function FormikDatePicker({
             isInvalid={!!error}
             labelPlacement="outside"
             radius="md"
-            selectorIcon={<Image src={CalendarIcon} width={16} height={16} />}
+            selectorIcon={
+              <ReactSVG src={CalendarIcon as string} className="text-black" width={16} height={16} />
+            }
             size="md"
             timeInputProps={{}}
             validationBehavior="aria"
@@ -156,7 +160,9 @@ function RhfDatePicker({
       isInvalid={!!error}
       labelPlacement="outside"
       radius="md"
-      selectorIcon={<Image src={CalendarIcon} width={16} height={16} />}
+      selectorIcon={
+        <ReactSVG src={CalendarIcon as string} className="text-black" width={16} height={16} />
+      }
       size="md"
       timeInputProps={{}}
       validationBehavior="aria"
