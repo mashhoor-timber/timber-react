@@ -45,7 +45,24 @@ export default function SelectCategory({
   }, [query]);
 
   // Map categories to match the `ExpenseCategory` type
-  const categoryOptions = [
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await timberClient.expenseCategory.list({
+          search: query,
+        });
+        console.log("Fetched data:", data); // Debug log
+        setCategoryData(data?.data?.expense_categories || []);
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+        setCategoryData([]);
+      }
+    };
+    fetchData();
+  }, [query, timberClient]);
+
+  // Hard-coded categories
+  const staticCategories = [
     {
       key: "travel",
       label: "Travel",
@@ -66,12 +83,19 @@ export default function SelectCategory({
       label: "Marketing",
       value: "marketing",
     },
-    ...(categoryData?.map((item: any) => ({
-      key: item.category?.value,
-      label: item.category?.label,
-      value: item.category?.value,
-    })) || []),
   ];
+
+  // Dynamic categories from API
+  const dynamicCategories = categoryData?.map((item: any) => ({
+    key: item.category?.value || item._id,
+    label: item.category?.label || "Unknown Category",
+    value: item.category?.value || item._id,
+  })) || [];
+
+  // Combine both static and dynamic categories
+  const categoryOptions = [...staticCategories, ...dynamicCategories];
+
+  console.log("Category options:", categoryOptions); // Debug log
 
   const renderItems: any = () => {
     if (!categoryOptions.length) return [];

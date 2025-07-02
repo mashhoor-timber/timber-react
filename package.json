@@ -1,6 +1,6 @@
 {
   "name": "timber-react-dev",
-  "version": "1.5.0",
+  "version": "1.5.3",
   "description": "Timber UI Library - Reusable React",
   "keywords": [
     "timber-react",
@@ -55,7 +55,7 @@
     "react-international-phone": "4.4.0",
     "rollup-plugin-dts": "^6.2.1",
     "rollup-plugin-strip": "^1.2.2",
-    "timber-node": "^0.0.3",
+    "timber-node": "^0.0.4",
     "yup": "1.4.0"
   },
   "devDependencies": {
