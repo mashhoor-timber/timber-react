@@ -15,6 +15,10 @@ export interface TimberClient {
     create: (payload: any) => Promise<any>;
     list: (payload: any) => Promise<any>;
   };
+  invoice: {
+    create: (payload: any) => Promise<any>;
+    list: (payload: any) => Promise<any>;
+  };
   // ...other properties
 }
 

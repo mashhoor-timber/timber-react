@@ -37,15 +37,6 @@ export interface PaymentMethodOption {
   label: string;
   value: string;
 }
-
-export interface ForwardedEmailData {
-  _id: string;
-  sender?: {
-    _id: string;
-  };
-  company?: string;
-}
-
 export interface AddExpenseFormProps {
   // Event handlers
   onSubmit: (data: ExpenseFormData) => Promise<void> | void;
