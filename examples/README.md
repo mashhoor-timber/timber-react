@@ -15,7 +15,7 @@ yarn add timber-react
 Make sure you have these installed:
 
 \`\`\`bash
-npm install react react-dom @heroui/react @tanstack/react-query formik date-fns
+npm install tailwindcss framer-motion
 \`\`\`
 
 ## Basic Usage

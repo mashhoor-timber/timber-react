@@ -18,10 +18,6 @@ export {
   formatDate,
   sanitizeFormData,
 } from "./utils/formatting";
-export {
-  defaultExpenseSchema,
-  createCustomExpenseSchema,
-} from "./utils/validation";
 
 export type {
   TimberBaseProps,

@@ -74,8 +74,6 @@ export default [
       'react',
       'framer-motion',
       '@heroui/react',
-      '@tanstack/react-query',
-      'formik',
       'date-fns',
       '@internationalized/date',
       'yup',

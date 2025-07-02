@@ -9,11 +9,8 @@ import {
   DateValue,
   ZonedDateTime,
 } from "@internationalized/date";
-import { Field, FieldProps } from "formik";
 import { useController, useFormContext } from "react-hook-form";
-
-import CalendarIcon from "../../../assets/icons/calendar.svg";
-import { ReactSVG } from "react-svg";
+import CalendarIcon from "./CalendarIcon";
 
 // Define a more specific type for the DatePicker props
 type DatePickerValue = ZonedDateTime | CalendarDate | CalendarDateTime | null;
@@ -24,15 +21,9 @@ interface CustomDatePickerProps
   disableFutureDates?: boolean;
   disabledDates?: Date[];
   disablePastDates?: boolean;
-  formType?: "formik" | "rhf";
   onChange?: (value: DatePickerValue) => void;
   validate?: any;
 }
-
-const styles = {
-  inputWrapper: "h-[60px] border border-divider",
-  label: "font-medium",
-};
 
 const dateValueToDate = (dateValue: DateValue): Date =>
   new Date(dateValue.year, dateValue.month - 1, dateValue.day);
@@ -66,61 +57,7 @@ const isDateUnavailable = (
   return false;
 };
 
-function FormikDatePicker({
-  name,
-  disableFutureDates,
-  disabledDates,
-  disablePastDates,
-  ...props
-}: CustomDatePickerProps) {
-  if (!name) return null;
-  return (
-    <Field name={name}>
-      {({ field, form: { touched, errors, setFieldValue } }: FieldProps) => {
-        const error = touched[name] && errors[name];
-        return (
-          <NextDatePicker
-            {...field}
-            hideTimeZone
-            showMonthAndYearPickers
-            calendarProps={{}}
-            classNames={{
-              base: "gap-1",
-              inputWrapper: `h-[42px] border border-divider px-4 mt-0 pt-0`,
-              label: "font-medium",
-              errorMessage: "text-start",
-            }}
-            errorMessage={error as string}
-            isDateUnavailable={(date) =>
-              isDateUnavailable(
-                date,
-                disableFutureDates,
-                disabledDates,
-                disablePastDates
-              )
-            }
-            isInvalid={!!error}
-            labelPlacement="outside"
-            radius="md"
-            selectorIcon={
-              <ReactSVG src={CalendarIcon as string} className="text-black" width={16} height={16} />
-            }
-            size="md"
-            timeInputProps={{}}
-            validationBehavior="aria"
-            variant="bordered"
-            onChange={(val) => {
-              setFieldValue(name, val);
-            }}
-            {...props}
-          />
-        ) as any;
-      }}
-    </Field>
-  );
-}
-
-function RhfDatePicker({
+function DatePicker({
   name,
   disableFutureDates,
   disabledDates,
@@ -161,7 +98,7 @@ function RhfDatePicker({
       labelPlacement="outside"
       radius="md"
       selectorIcon={
-        <ReactSVG src={CalendarIcon as string} className="text-black" width={16} height={16} />
+        <CalendarIcon width={16} height={16} className="text-gray-400" />
       }
       size="md"
       timeInputProps={{}}
@@ -175,11 +112,4 @@ function RhfDatePicker({
   ) as any;
 }
 
-export default function DatePicker({
-  formType = "formik",
-  ...props
-}: CustomDatePickerProps) {
-  if (formType === "formik") return (<FormikDatePicker {...props} />) as any;
-  if (formType === "rhf") return (<RhfDatePicker {...props} />) as any;
-  return (<NextDatePicker {...props} />) as any;
-}
+export default DatePicker;

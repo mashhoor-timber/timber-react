@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import {
   Autocomplete,
@@ -7,9 +7,9 @@ import {
   AutocompleteSection,
 } from "@heroui/react";
 
-import CategoriesIcon from "../../../../assets/icons/categories.svg";
 import { ExpenseCategory } from "../types";
-import { ReactSVG } from "react-svg";
+import CategoriesIcon from "./CategoriesIcon";
+import { useTimberClient } from "providers/TimberProvider";
 
 interface Props extends Omit<AutocompleteProps, "children"> {
   buttonOnClick: () => void;
@@ -29,17 +29,20 @@ export default function SelectCategory({
 }: Props) {
   const [selected, setSelected] = useState<string | null>(selectedKey || null);
   const [query, setQuery] = useState("");
-
-  // const {
-  //   data: expenseCategoryData,
-  //   isError,
-  //   isFetching,
-  // } = useQuery({
-  //   queryKey: ["getCategories"],
-  //   queryFn: () => expenseCategory({ company: company?._id, search: query }),
-  // });
+  const timberClient = useTimberClient();
+  const [categoryData, setCategoryData] = useState<ExpenseCategory[]>([]);
 
   const expenseCategoryData: never[] = [];
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await timberClient.expenseCategory.list({
+        search: query,
+      });
+      setCategoryData(data?.expense_categories || []);
+    };
+    fetchData();
+  }, [query]);
 
   // Map categories to match the `ExpenseCategory` type
   const categoryOptions = [
@@ -63,11 +66,11 @@ export default function SelectCategory({
       label: "Marketing",
       value: "marketing",
     },
-    // ...(expenseCategoryData?.expense_categories?.map((item: any) => ({
-    //   key: item.category?.value,
-    //   label: item.category?.label,
-    //   value: item.category?.value,
-    // })) || []),
+    ...(categoryData?.map((item: any) => ({
+      key: item.category?.value,
+      label: item.category?.label,
+      value: item.category?.value,
+    })) || []),
   ];
 
   const renderItems: any = () => {
@@ -133,12 +136,8 @@ export default function SelectCategory({
           textValue="add_category"
         >
           <div className="flex items-center text-primary font-medium px-2 gap-2">
-            {/* <ReactSVG
-              src={CategoriesIcon}
-              className="text-primary"
-              height={24}
-              width={24}
-            /> */}
+            {JSON.stringify(categoryData)}
+            <CategoriesIcon height={24} width={24} className="text-primary" />
             <span className="font-medium">{buttonText}</span>
           </div>
         </AutocompleteItem>

@@ -1,5 +1,4 @@
 import { Divider, Spacer } from "@heroui/react";
-import { Form, Formik } from "formik";
 
 import Button from "@components/atomic/Button";
 import Input from "@components/atomic/Input";
@@ -11,6 +10,8 @@ import Modal, {
 } from "@components/atomic/Modal";
 
 import { expenseCategorySchema } from "../schema";
+import Form from "@components/atomic/Form";
+import { useTimberClient } from "providers/TimberProvider";
 
 type AddCategoryModalProps = {
   isOpen: boolean;
@@ -21,48 +22,36 @@ export default function AddCategoryModal({
   isOpen,
   onClose,
 }: AddCategoryModalProps) {
+  const timberClient = useTimberClient();
 
-  // const { mutate, isPending } = useMutation({
-  //     mutationFn: addExpenseCategory,
-  //     onSuccess: res => {
-  //         toast.success(`Category added successfully`);
-  //         queryClient.invalidateQueries({ queryKey: ['getCategories'] });
-  //         onClose();
-  //     },
-  //     onError: (error: any) => {
-  //         const message = error?.response?.data?.message || 'Something went wrong';
-  //         toast.error(message);
-  //     },
-  // });
-
-  const handleSubmit = async (values: any) => {
-    //todo
+  const onSubmit = async (values: any) => {
+    try {
+      await timberClient.expenseCategory.create(values);
+      onClose();
+    } catch (error) {
+      console.log(error);
+    }
   };
-
-  const company = ""; //todo
+  
   return (
     <Modal isOpen={isOpen} size="xl" onOpenChange={onClose}>
       <ModalContent>
         <ModalHeader>Add New Category</ModalHeader>
-        <Formik
-          initialValues={{
-            company: company,
+        <Form
+          defaultValues={{
             category: "",
           }}
-          validationSchema={expenseCategorySchema}
-          onSubmit={(values: any) => {
-            handleSubmit(values);
-          }}
+          schema={expenseCategorySchema}
+          onSubmit={onSubmit}
         >
-          {({ submitForm, isValid }: any) => (
-            <Form className="">
+          {({ formState: { isSubmitting, isValid, isDirty, errors } }) => (
+            <>
               <ModalBody>
                 <Input
                   isRequired
                   label="Category"
                   name="category"
                   placeholder="Enter category"
-                  formLib="formik"
                 />
               </ModalBody>
               <ModalFooter>
@@ -75,8 +64,8 @@ export default function AddCategoryModal({
                     </Button>
                     <Button
                       color="primary"
-                      isDisabled={!isValid}
-                      // isLoading={isPending}
+                      //   isDisabled={!isValid}
+                      isLoading={isSubmitting}
                       type="submit"
                     >
                       Submit
@@ -84,9 +73,9 @@ export default function AddCategoryModal({
                   </div>
                 </div>
               </ModalFooter>
-            </Form>
+            </>
           )}
-        </Formik>
+        </Form>
       </ModalContent>
     </Modal>
   );

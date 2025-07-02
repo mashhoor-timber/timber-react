@@ -1,9 +1,8 @@
 import { useEffect } from "react";
 
 import { ModalProps, Modal as NextModal } from "@heroui/react";
+import CloseIcon from "./CloseIcon";
 
-import crossIcon from "../../../assets/icons/cross.svg";
-import { ReactSVG } from "react-svg";
 // import { useDirection } from '@hooks/useDirection';
 
 export default function Modal({ children, ...props }: ModalProps) {
@@ -20,9 +19,9 @@ export default function Modal({ children, ...props }: ModalProps) {
     <NextModal
       classNames={{
         base: "bg-background rounded-3xl",
-        closeButton: "top-[10px]",
+        closeButton: "right-4 top-[10px]",
       }}
-      closeButton={<ReactSVG src={crossIcon} className="text-black" width={24} height={24} />}
+      closeButton={<CloseIcon width={28} height={28} className="text-black" />}
       isDismissable={false}
       placement="center"
       {...props}

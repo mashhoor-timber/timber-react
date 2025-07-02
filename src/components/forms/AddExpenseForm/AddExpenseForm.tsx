@@ -7,7 +7,7 @@ import DatePicker from "../../atomic/DatePicker";
 import Input from "../../atomic/Input";
 import SelectInputWithSearch from "../../atomic/SelectInputWithSearch";
 
-import { defaultExpenseSchema } from "../../../utils/validation";
+import { expenseSchema } from "./schema";
 import { DEFAULT_PAYMENT_METHODS } from "./constants";
 import { AddExpenseFormProps, ExpenseFormData } from "./types";
 import ChooseCategory from "./components/ChooseCategory";
@@ -35,7 +35,7 @@ export const AddExpenseForm: React.FC<AddExpenseFormProps> = ({
     currency: defaultCurrency || "AED",
   };
 
-  const validationSchema = defaultExpenseSchema;
+  const validationSchema = expenseSchema;
 
   const onSubmit = async (values: ExpenseFormData) => {
     try {
@@ -65,17 +65,12 @@ export const AddExpenseForm: React.FC<AddExpenseFormProps> = ({
         onSubmit={onSubmit}
         resetOnSubmit
       >
-        {({ formState: { isSubmitting, isValid, isDirty, errors }}) => (
+        {({ formState: { isSubmitting, isValid, isDirty, errors } }) => (
           <div className="space-y-3">
             {JSON.stringify(errors)}
-            <Input isRequired formLib="rhf" name="type" placeholder="Type" />
+            <Input isRequired name="type" placeholder="Type" />
             <Spacer y={3} />
-            <Input
-              isRequired
-              formLib="rhf"
-              name="merchant"
-              placeholder="Merchant"
-            />
+            <Input isRequired name="merchant" placeholder="Merchant" />
             <Spacer y={3} />
 
             <ChooseCategory key={formKey} addCategoryModal={addCategoryModal} />
@@ -84,7 +79,6 @@ export const AddExpenseForm: React.FC<AddExpenseFormProps> = ({
             <SelectInputWithSearch
               key={`${formKey}payment`}
               isRequired
-              formType="rhf"
               name="payment_method"
               options={paymentMethodOptions || []}
               placeholder="Payment Method"
@@ -98,19 +92,13 @@ export const AddExpenseForm: React.FC<AddExpenseFormProps> = ({
                   {defaultCurrency || "AED"}
                 </span>
               }
-              formLib="rhf"
               name="amount"
               placeholder="Enter amount"
               type="number"
             />
             <Spacer y={3} />
 
-            <DatePicker
-              disableFutureDates
-              isRequired
-              formType="rhf"
-              name="date"
-            />
+            <DatePicker disableFutureDates isRequired name="date" />
             <Spacer y={3} />
             <Button
               fullWidth
