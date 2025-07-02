@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { Spacer, useDisclosure } from "@heroui/react";
-import { yupResolver } from "@hookform/resolvers/yup";
 import { getLocalTimeZone, today } from "@internationalized/date";
-import { FormProvider, useForm } from "react-hook-form";
 
 import Button from "../../atomic/Button";
 import DatePicker from "../../atomic/DatePicker";
@@ -10,27 +8,22 @@ import Input from "../../atomic/Input";
 import SelectInputWithSearch from "../../atomic/SelectInputWithSearch";
 
 import { defaultExpenseSchema } from "../../../utils/validation";
-import { DEFAULT_PAYMENT_METHODS, DEFAULT_CURRENCIES } from "./constants";
+import { DEFAULT_PAYMENT_METHODS } from "./constants";
 import { AddExpenseFormProps, ExpenseFormData } from "./types";
 import ChooseCategory from "./components/ChooseCategory";
-import ConfirmModal from "./components/ConfirmModal";
 import AddCategoryModal from "./components/AddCategoryModal";
-import CurrencyInput from "@components/atomic/CurrencyInput";
+import Form from "@components/atomic/Form";
+import { useTimberClient } from "providers/TimberProvider";
 
 export const AddExpenseForm: React.FC<AddExpenseFormProps> = ({
-  customCurrencyOptions,
   customPaymentMethods,
-  onSubmit,
   onSuccess,
   onError,
-  isSubmitting = false,
-  customValidationSchema,
   defaultCurrency,
 }) => {
-  const [pendingExpense, setPendingExpense] = useState(null);
   const [formKey, setFormKey] = useState(Date.now());
   const addCategoryModal = useDisclosure();
-  const similarExpenseModal = useDisclosure();
+  const timberClient = useTimberClient();
 
   const initialValues: ExpenseFormData = {
     type: "",
@@ -39,113 +32,102 @@ export const AddExpenseForm: React.FC<AddExpenseFormProps> = ({
     category: "",
     merchant: "",
     date: today(getLocalTimeZone()),
-    currency: "",
+    currency: defaultCurrency || "AED",
   };
 
-  const handleSubmit = async (values: ExpenseFormData, { resetForm }: any) => {
+  const validationSchema = defaultExpenseSchema;
+
+  const onSubmit = async (values: ExpenseFormData) => {
     try {
       const payload = {
         ...values,
         date: values.date.toString(),
       };
 
-      await onSubmit(payload);
-      resetForm();
+      await timberClient.expense.create(payload);
+      setFormKey(Date.now());
       onSuccess?.();
     } catch (error) {
       onError?.(error as Error);
     }
   };
 
-  const validationSchema = customValidationSchema || defaultExpenseSchema;
-
-  const methods = useForm({
-    defaultValues: initialValues,
-    resolver: yupResolver(validationSchema),
-    mode: "onTouched",
-    reValidateMode: "onChange",
-    shouldFocusError: true,
-    criteriaMode: "firstError",
-  });
+  const paymentMethodOptions = [
+    ...(customPaymentMethods || []),
+    ...DEFAULT_PAYMENT_METHODS,
+  ];
 
   return (
     <>
-      <FormProvider {...methods}>
-        <div className="space-y-3">
-          <Input isRequired formLib="rhf" name="type" placeholder="Type" />
-          <Spacer y={3} />
-          <Input
-            isRequired
-            formLib="rhf"
-            name="merchant"
-            placeholder="Merchant"
-          />
-          <Spacer y={3} />
+      <Form
+        defaultValues={initialValues}
+        schema={validationSchema}
+        onSubmit={onSubmit}
+        resetOnSubmit
+      >
+        {({ formState: { isSubmitting, isValid, isDirty, errors }}) => (
+          <div className="space-y-3">
+            {JSON.stringify(errors)}
+            <Input isRequired formLib="rhf" name="type" placeholder="Type" />
+            <Spacer y={3} />
+            <Input
+              isRequired
+              formLib="rhf"
+              name="merchant"
+              placeholder="Merchant"
+            />
+            <Spacer y={3} />
 
-          <ChooseCategory key={formKey} addCategoryModal={addCategoryModal} />
-          <Spacer y={3} />
+            <ChooseCategory key={formKey} addCategoryModal={addCategoryModal} />
+            <Spacer y={3} />
 
-          <SelectInputWithSearch
-            key={`${formKey}payment`}
-            isRequired
-            formType="rhf"
-            name="payment_method"
-            options={customPaymentMethods || DEFAULT_PAYMENT_METHODS || []}
-            placeholder="Payment Method"
-          />
-          <Spacer y={3} />
+            <SelectInputWithSearch
+              key={`${formKey}payment`}
+              isRequired
+              formType="rhf"
+              name="payment_method"
+              options={paymentMethodOptions || []}
+              placeholder="Payment Method"
+            />
+            <Spacer y={3} />
 
-          <Input
-            isRequired
-            endContent={
-              <span className="text-xs text-default-500">
-                {defaultCurrency || "AED"}
-              </span>
-            }
-            formLib="rhf"
-            name="amount"
-            placeholder="Enter amount"
-            type="number"
-          />
-          <Spacer y={3} />
+            <Input
+              isRequired
+              endContent={
+                <span className="text-xs text-default-500">
+                  {defaultCurrency || "AED"}
+                </span>
+              }
+              formLib="rhf"
+              name="amount"
+              placeholder="Enter amount"
+              type="number"
+            />
+            <Spacer y={3} />
 
-          <DatePicker
-            disableFutureDates
-            isRequired
-            formType="rhf"
-            name="date"
-          />
-          <Spacer y={3} />
-          <Button
-            fullWidth
-            color="primary"
-            isLoading={isSubmitting}
-            type="submit"
-            onClick={methods.handleSubmit(onSubmit)}
-          >
-            Submit
-          </Button>
-        </div>
-      </FormProvider>
-
+            <DatePicker
+              disableFutureDates
+              isRequired
+              formType="rhf"
+              name="date"
+            />
+            <Spacer y={3} />
+            <Button
+              fullWidth
+              color="primary"
+              // isDisabled={!isValid || !isDirty}
+              isLoading={isSubmitting}
+              type="submit"
+            >
+              Submit
+            </Button>
+          </div>
+        )}
+      </Form>
       {addCategoryModal?.isOpen && (
         <AddCategoryModal
           isOpen={addCategoryModal.isOpen}
           onClose={addCategoryModal.onClose}
-        />
-      )}
-
-      {similarExpenseModal?.isOpen && (
-        <ConfirmModal
-          isOpen={similarExpenseModal.isOpen}
-          message="You have already added a similar expense today. Do you want to add it anyway?"
-          onClose={similarExpenseModal.onClose}
-          onConfirm={() => {
-            if (pendingExpense) {
-              handleSubmit(pendingExpense, true);
-              similarExpenseModal.onClose();
-            }
-          }}
         />
       )}
     </>

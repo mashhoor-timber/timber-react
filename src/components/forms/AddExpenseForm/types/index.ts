@@ -33,7 +33,7 @@ export interface CategoryOption {
   value: string;
 }
 
-export interface AccountOption {
+export interface PaymentMethodOption {
   label: string;
   value: string;
 }
@@ -53,10 +53,7 @@ export interface AddExpenseFormProps {
   onError?: (error: Error) => void;
 
   // Customization options
-  customPaymentMethods?: AccountOption[];
-  customCurrencyOptions?: CurrencyOption[];
-  hideWafeqIntegration?: boolean;
-  hideZohoIntegration?: boolean;
+  customPaymentMethods?: PaymentMethodOption[];
   defaultCurrency?: string;
 
   // Styling

@@ -72,7 +72,6 @@ export default [
     ],
     external: [
       'react',
-      'react-dom',
       'framer-motion',
       '@heroui/react',
       '@tanstack/react-query',
