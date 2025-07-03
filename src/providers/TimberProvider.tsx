@@ -7,6 +7,8 @@ export interface TimberConfig {
 }
 
 export interface TimberClient {
+  invoicePayment: any;
+  billPayment: any;
   expense: {
     create: (payload: any) => Promise<any>;
     // ...other methods
@@ -18,11 +20,16 @@ export interface TimberClient {
   invoice: {
     create: (payload: any) => Promise<any>;
     list: (payload: any) => Promise<any>;
-    get(id: string): Promise<any>;
+    get: (payload: any) => Promise<any>;
   };
   customer: {
     create: (payload: any) => Promise<any>;
     list: (payload: any) => Promise<any>;
+  },
+  vendorPayment: {
+    create: (payload: any) => Promise<any>;
+    list: (payload: any) => Promise<any>;
+    get: (payload: any) => Promise<any>;
   }
   // ...other properties
 }

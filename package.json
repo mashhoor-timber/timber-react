@@ -1,6 +1,6 @@
 {
-  "name": "timber-react-dev",
-  "version": "1.5.5",
+  "name": "timber-react-dev1",
+  "version": "1.6.2",
   "description": "Timber UI Library - Reusable React",
   "keywords": [
     "timber-react",
@@ -43,6 +43,7 @@
     "@heroui/theme": "2.4.6",
     "@heroui/use-infinite-scroll": "2.2.3",
     "@hookform/resolvers": "^5.1.1",
+    "@internationalized/date": "^3.8.2",
     "@rollup/plugin-strip": "^3.0.4",
     "@rollup/plugin-terser": "^0.4.4",
     "@svgr/rollup": "^8.1.0",
