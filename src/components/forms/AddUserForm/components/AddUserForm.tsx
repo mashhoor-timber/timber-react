@@ -6,21 +6,24 @@ import Input from '@components/atomic/Input';
 import Textarea from '@components/atomic/Textarea';
 
 
-import { userSchema } from '../schema'; //userSchema
-import { UserPayload } from '../types'// userPayload
+import { userSchema } from '../schema';
+import { UserPayload } from '../types'
 import Form from "@components/atomic/Form";
 
 import MobilenumberInput from '@components/atomic/MobilenumberInput';
 import Select, { SelectItem } from '@components/atomic/Select';
+import { useTimberClient } from 'providers/TimberProvider';
 
 
 export default function AddUserForm() {
+    const timberClient = useTimberClient();
 
     const onSubmit = async (values: UserPayload) => {
         const payload: UserPayload = {
             ...values,
 
         }
+        await timberClient.customer.create(payload)
     }
     const initialValues: UserPayload = {
         name: '',
@@ -85,23 +88,6 @@ export default function AddUserForm() {
                             nameMobile="mobile"
                         />
                     </div>
-
-                    {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-start">
-                                <SelectInputWithSearch
-                                    isRequired
-                                    label="Country or region"
-                                    name="country"
-                                    options={countryData}
-                                    placeholder="Select country"
-                                />
-                                <Input
-                                    isRequired
-                                    label="City"
-                                    name="city"
-                                    placeholder="Enter city"
-                                />
-                            </div> */}
-
                     <Textarea
                         isRequired
                         label="Address"
@@ -116,7 +102,6 @@ export default function AddUserForm() {
                         <Divider />
                         <Spacer y={4} />
                         <div className="flex justify-end gap-2">
-
                             <Button color="primary" type="submit" isLoading={isSubmitting}>
                                 Submit
                             </Button>
