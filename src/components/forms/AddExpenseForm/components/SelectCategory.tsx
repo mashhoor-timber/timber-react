@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-
 import {
   Autocomplete,
   AutocompleteItem,
@@ -29,76 +28,56 @@ export default function SelectCategory({
 }: Props) {
   const [selected, setSelected] = useState<string | null>(selectedKey || null);
   const [query, setQuery] = useState("");
-  const timberClient = useTimberClient();
   const [categoryData, setCategoryData] = useState<ExpenseCategory[]>([]);
+  const [loading, setLoading] = useState(false);
 
-  const expenseCategoryData: never[] = [];
+  const timberClient = useTimberClient();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const data = await timberClient.expenseCategory.list({
-        search: query,
-      });
-      setCategoryData(data?.expense_categories || []);
-    };
-    fetchData();
-  }, [query]);
-
-  // Map categories to match the `ExpenseCategory` type
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await timberClient.expenseCategory.list({
-          search: query,
-        });
-        console.log("Fetched data:", data); // Debug log
+        setLoading(true);
+        const data = await timberClient.expenseCategory.list({ search: query });
         setCategoryData(data?.data?.expense_categories || []);
       } catch (error) {
         console.error("Error fetching categories:", error);
         setCategoryData([]);
+      } finally {
+        setLoading(false);
       }
     };
     fetchData();
   }, [query, timberClient]);
 
-  // Hard-coded categories
   const staticCategories = [
-    {
-      key: "travel",
-      label: "Travel",
-      value: "travel",
-    },
-    {
-      key: "utilities",
-      label: "Utilities",
-      value: "utilities",
-    },
+    { key: "travel", label: "Travel", value: "travel" },
+    { key: "utilities", label: "Utilities", value: "utilities" },
     {
       key: "office_supplies",
       label: "Office Supplies",
       value: "office_supplies",
     },
-    {
-      key: "marketing",
-      label: "Marketing",
-      value: "marketing",
-    },
+    { key: "marketing", label: "Marketing", value: "marketing" },
   ];
 
-  // Dynamic categories from API
-  const dynamicCategories = categoryData?.map((item: any) => ({
-    key: item.category?.value || item._id,
-    label: item.category?.label || "Unknown Category",
-    value: item.category?.value || item._id,
-  })) || [];
+  const dynamicCategories =
+    categoryData?.map((item: any) => ({
+      key: item.category?.value || item._id,
+      label: item.category?.label || "Unknown Category",
+      value: item.category?.value || item._id,
+    })) || [];
 
-  // Combine both static and dynamic categories
   const categoryOptions = [...staticCategories, ...dynamicCategories];
 
-  console.log("Category options:", categoryOptions); // Debug log
+  const renderItems = () => {
+    if (!categoryOptions.length && !loading) {
+      return (
+        <AutocompleteItem key="no_data" isDisabled>
+          No categories found
+        </AutocompleteItem>
+      );
+    }
 
-  const renderItems: any = () => {
-    if (!categoryOptions.length) return [];
     return categoryOptions.map((item) => (
       <AutocompleteItem
         key={item.value}
@@ -121,6 +100,7 @@ export default function SelectCategory({
       allowsCustomValue
       isClearable
       showScrollIndicators
+      isLoading={loading}
       aria-label={props.placeholder}
       inputProps={{
         classNames: {
@@ -129,7 +109,6 @@ export default function SelectCategory({
           label: "font-medium",
         },
       }}
-      // isLoading={isFetching}
       label={props.label}
       labelPlacement="outside"
       placeholder={props.placeholder}
@@ -160,13 +139,12 @@ export default function SelectCategory({
           textValue="add_category"
         >
           <div className="flex items-center text-primary font-medium px-2 gap-2">
-            {JSON.stringify(categoryData)}
             <CategoriesIcon height={24} width={24} className="text-primary" />
             <span className="font-medium">{buttonText}</span>
           </div>
         </AutocompleteItem>
       </AutocompleteSection>
-      {renderItems()}
+      <>{renderItems()}</>
     </Autocomplete>
   );
 }
