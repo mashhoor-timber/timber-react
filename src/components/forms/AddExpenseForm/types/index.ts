@@ -46,14 +46,4 @@ export interface AddExpenseFormProps {
   // Customization options
   customPaymentMethods?: PaymentMethodOption[];
   defaultCurrency?: string;
-
-  // Styling
-  className?: string;
-  formClassName?: string;
-
-  // Loading states
-  isSubmitting?: boolean;
-
-  // Validation
-  customValidationSchema?: any;
 }
