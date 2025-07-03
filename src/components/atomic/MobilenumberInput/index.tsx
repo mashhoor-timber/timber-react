@@ -8,7 +8,7 @@ interface CustomInputProps extends InputProps {
   nameCode: string;
 }
 
-export default function MobilenumberInput({
+export default function MobileNumberInput({
   nameMobile,
   nameCode,
   ...props

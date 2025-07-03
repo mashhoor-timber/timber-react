@@ -1,4 +1,6 @@
 export { AddExpenseForm } from "./components/forms/AddExpenseForm";
+export { AddUserForm } from "./components/forms/AddUserForm";
+export { AddEmployeeForm } from "./components/forms/AddEmployeeForm";
 export { AddPaymentForm } from "./components/forms/AddPaymentForm";
 export type {
   AddExpenseFormProps,

@@ -10,7 +10,7 @@ import {
   ZonedDateTime,
 } from "@internationalized/date";
 import { useController, useFormContext } from "react-hook-form";
-import CalendarIcon from "./CalendarIcon";
+import CalendarIcon from "../../../assets/icons/CalendarIcon";
 
 // Define a more specific type for the DatePicker props
 type DatePickerValue = ZonedDateTime | CalendarDate | CalendarDateTime | null;

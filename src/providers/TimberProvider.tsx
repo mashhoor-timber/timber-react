@@ -31,6 +31,10 @@ export interface TimberClient {
     list: (payload: any) => Promise<any>;
     get: (payload: any) => Promise<any>;
   }
+  employee: {
+    create: (payload: any) => Promise<any>;
+    list: (payload: any) => Promise<any>;
+  }
   // ...other properties
 }
 
