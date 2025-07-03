@@ -7,7 +7,7 @@ import {
 } from "@heroui/react";
 
 import { ExpenseCategory } from "../types";
-import CategoriesIcon from "./CategoriesIcon";
+import CategoriesIcon from "../../../../assets/icons/CategoriesIcon";
 import { useTimberClient } from "providers/TimberProvider";
 
 interface Props extends Omit<AutocompleteProps, "children"> {
