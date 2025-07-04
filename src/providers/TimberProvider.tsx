@@ -23,11 +23,14 @@ export interface TimberClient {
   customer: {
     create: (payload: any) => Promise<any>;
     list: (payload: any) => Promise<any>;
-  }
+  };
   employee: {
     create: (payload: any) => Promise<any>;
     list: (payload: any) => Promise<any>;
-  }
+  };
+  bankStatement: {
+    create: (payload: any) => Promise<any>;
+  };
   // ...other properties
 }
 
