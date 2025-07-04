@@ -1,6 +1,6 @@
 import { Image } from "@heroui/react";
-import CloseIcon from "assets/icons/CloseIcon";
-import ContentIcon from "assets/icons/ContentIcon";
+import CloseIcon from "@assets/icons/CloseIcon";
+import ContentIcon from "@assets/icons/ContentIcon";
 import { useController, useFormContext } from "react-hook-form";
 
 type Props = {

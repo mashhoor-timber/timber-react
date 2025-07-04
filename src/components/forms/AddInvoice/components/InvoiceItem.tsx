@@ -14,8 +14,8 @@ import Select, { SelectItem } from "@components/atomic/Select";
 import { NewInvoiceItem } from "../types";
 
 import InvoiceItemTitle from "./InvoiceItemTitle";
-import DragIcon from "assets/icons/DragIcon";
-import MinusIcon from "assets/icons/MinusIcon";
+import DragIcon from "@assets/icons/DragIcon";
+import MinusIcon from "@assets/icons/MinusIcon";
 
 type Props = {
   id: string;

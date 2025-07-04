@@ -4,7 +4,7 @@ import { useFormContext, useWatch } from 'react-hook-form';
 
 import Dropdown, { DropdownItem, DropdownMenu, DropdownTrigger } from '@components/atomic/Dropdown';
 import { CreateInvoiceValues } from '../types';
-import ArrowDownIcon from 'assets/icons/ArrowDownIcon';
+import ArrowDownIcon from '@assets/icons/ArrowDownIcon';
 
 const options = [
     { title: 'Invoice', key: 'invoice' },

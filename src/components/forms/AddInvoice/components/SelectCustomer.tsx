@@ -8,18 +8,15 @@ import {
   Image,
 } from "@heroui/react";
 
-// import addProfileIcon from '@assets/icons/profile-add.svg';
-// import user from '@assets/icons/user_profile.svg';
-
 import {
   Invoice,
   InvoiceCustomer,
   InvoiceCustomerResponse,
   SuggestedCustomerResponse,
 } from "../types";
-import AddUserIcon from "assets/icons/AddUserIcon";
-import user from "@assets/icons/user_profile.svg";
-import ProfileIcon from "assets/icons/ProfileIcon";
+
+import AddUserIcon from "@assets/icons/AddUserIcon";
+import ProfileIcon from "@assets/icons/ProfileIcon";
 
 interface Props extends Omit<AutocompleteProps, "children"> {
   buttonOnClick: () => void;
