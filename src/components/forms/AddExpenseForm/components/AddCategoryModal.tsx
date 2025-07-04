@@ -11,7 +11,7 @@ import Modal, {
 
 import { expenseCategorySchema } from "../schema";
 import Form from "@components/atomic/Form";
-import { useTimberClient } from "providers/TimberProvider";
+import { useTimberClient } from "@providers/TimberProvider";
 
 type AddCategoryModalProps = {
   isOpen: boolean;

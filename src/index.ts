@@ -4,3 +4,5 @@ export { AddEmployeeForm } from "./components/forms/AddEmployeeForm";
 
 // Export provider
 export { TimberProvider, useTimberConfig } from "./providers/TimberProvider";
+
+export { AddInvoice } from "./components/forms/AddInvoice";
