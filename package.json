@@ -64,7 +64,7 @@
     "sonner": "^2.0.5",
     "use-debounce": "^10.0.5",
     "uuid": "^11.1.0",
-    "timber-node": "^0.0.7",
+    "timber-node": "^0.0.8",
     "yup": "1.4.0"
   },
   "devDependencies": {
