@@ -1,6 +1,6 @@
 import DatePicker from "@components/atomic/DatePicker";
 import Input from "@components/atomic/Input";
-import MobilenumberInput from "@components/atomic/MobilenumberInput";
+import MobileNumberInput from "@components/atomic/MobileNumberInput";
 import SelectInputWithSearch from "@components/atomic/SelectInputWithSearch";
 import { Divider, Spacer, useDisclosure } from "@heroui/react";
 import DropImage from "./DropImage";
@@ -57,7 +57,7 @@ function InvoiceForm({ setRole, setSelectedUser }: InvoiceFormProps) {
             name="biller.email"
             placeholder="Biller email"
           />
-          <MobilenumberInput
+          <MobileNumberInput
             isRequired
             label=""
             nameCode="biller.country_code"
@@ -102,7 +102,7 @@ function InvoiceForm({ setRole, setSelectedUser }: InvoiceFormProps) {
             name="customer.address"
             placeholder="Address"
           />
-          <MobilenumberInput
+          <MobileNumberInput
             isRequired
             label=""
             nameCode="customer.country_code"
