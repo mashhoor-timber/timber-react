@@ -1,17 +1,19 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "outDir": "dist",
     "declaration": true,
     "declarationMap": true,
-    "emitDeclarationOnly": false
+    "sourceMap": true,
+    "removeComments": true,
+    "emitDeclarationOnly": false,
+    "noEmit": false
   },
   "exclude": [
+    "node_modules",
+    "dist",
     "**/*.stories.tsx",
     "**/*.test.tsx",
     "**/*.spec.tsx",
-    "stories/**/*",
-    "dist",
-    "node_modules"
+    "storybook"
   ]
 }
