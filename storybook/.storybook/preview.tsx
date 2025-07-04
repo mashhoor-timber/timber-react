@@ -2,15 +2,29 @@ import { TimberProvider } from "../../src/providers/TimberProvider";
 import { themes } from "storybook/theming";
 import "./style.css";
 
-const mockConfig = {
-  apiKey: "storybook-mock-api-key",
-  baseUrl: "https://mock-api.timber.me",
-};
+let globalApiToken = "";
+
+if (typeof window !== "undefined") {
+  globalApiToken = localStorage.getItem("storybook-api-token") || "";
+}
 
 const decorators = [
-  (Story) => {
+  (Story, context) => {
+    const apiToken = context.args?.apiToken || context.globals.apiToken;
+
+    if (apiToken && apiToken !== globalApiToken) {
+      globalApiToken = apiToken;
+      if (typeof window !== "undefined") {
+        localStorage.setItem("storybook-api-token", apiToken);
+      }
+    }
+
+    const config = {
+      apiKey: apiToken || globalApiToken,
+    };
+
     return (
-      <TimberProvider config={mockConfig}>
+      <TimberProvider config={config}>
         <div
           style={{
             minHeight: "100vh",
@@ -67,6 +81,40 @@ const preview = {
   decorators,
   parameters,
   tags: ["autodocs"],
+  args: {
+    apiToken: globalApiToken,
+  },
+  argTypes: {
+    apiToken: {
+      name: "API Token",
+      description: "Enter your Timber API token (saved in localStorage)",
+      control: {
+        type: "text",
+      },
+      table: {
+        category: "API Configuration",
+      },
+    },
+  },
+  globalTypes: {
+    apiToken: {
+      description: "Enter your Timber API token (saved in localStorage)",
+      defaultValue: globalApiToken,
+      control: {
+        type: "text",
+      },
+      toolbar: {
+        title: "API Token",
+        icon: "key",
+        items: [
+          { value: "", title: "Clear Token" },
+          { value: "", title: "Use Demo Token" },
+        ],
+        dynamicTitle: true,
+        showName: true,
+      },
+    },
+  },
 };
 
 export default preview;
