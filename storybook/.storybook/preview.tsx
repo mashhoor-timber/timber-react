@@ -1,12 +1,27 @@
 import { TimberProvider } from "../../src/providers/TimberProvider";
 import { themes } from "storybook/theming";
 import "./style.css";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 let globalApiToken = "";
 
 if (typeof window !== "undefined") {
   globalApiToken = localStorage.getItem("storybook-api-token") || "";
 }
+
+// Create a single QueryClient instance with proper configuration for Storybook
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: false, // Don't retry failed requests in Storybook
+      staleTime: 1000 * 60 * 5, // 5 minutes
+      refetchOnWindowFocus: false, // Don't refetch on window focus in Storybook
+    },
+    mutations: {
+      retry: false, // Don't retry failed mutations in Storybook
+    },
+  },
+});
 
 const decorators = [
   (Story, context) => {
@@ -21,21 +36,24 @@ const decorators = [
     }
 
     const config = {
-      apiKey: apiToken || globalApiToken || "demo-token-please-enter-real-token",
+      apiKey:
+        apiToken || globalApiToken || "demo-token-please-enter-real-token",
     };
 
     return (
-      <TimberProvider config={config}>
-        <div
-          style={{
-            minHeight: "100vh",
-            backgroundColor: "#ffffff",
-            padding: "1rem",
-          }}
-        >
-          <Story />
-        </div>
-      </TimberProvider>
+      <QueryClientProvider client={queryClient}>
+        <TimberProvider config={config}>
+          <div
+            style={{
+              minHeight: "100vh",
+              backgroundColor: "#ffffff",
+              padding: "1rem",
+            }}
+          >
+            <Story />
+          </div>
+        </TimberProvider>
+      </QueryClientProvider>
     );
   },
 ];
