@@ -71,6 +71,7 @@ export const AddPaymentForm:React.FC <AddPaymentFormProps> = ({ invoiceID, type 
     await timberClient.billPayment.create({
       ...values,
       date: values?.date?.toISOString(),
+      file: values?.file ? values?.file[0] : null,
       cheque_due_date: values?.cheque_due_date?.toISOString(),
     });
   };
