@@ -11,7 +11,7 @@ import Input from "@components/atomic/Input";
 // import { getNextInvoiceNumber } from "../../api/invoiceNumber";
 import { CreateInvoiceValues } from "../types";
 // import InvoiceNumberSettingsModal from "../InvoiceNumberSettingsModal";
-import SettingsIcon from "assets/icons/SettingsIcon";
+import SettingsIcon from "@assets/icons/SettingsIcon";
 
 export default function InvoiceNumberInput() {
   const invoiceNumberSettingsModal = useDisclosure();

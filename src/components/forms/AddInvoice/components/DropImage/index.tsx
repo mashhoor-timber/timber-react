@@ -1,4 +1,4 @@
-import UploadIcon from 'assets/icons/UploadIcon';
+import UploadIcon from '@assets/icons/UploadIcon';
 import { Accept, FileRejection, useDropzone } from 'react-dropzone';
 import { useController, useFormContext } from 'react-hook-form';
 import { toast } from 'sonner';

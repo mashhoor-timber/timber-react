@@ -9,7 +9,7 @@ import { getLocalTimeZone, today } from "@internationalized/date";
 import InvoiceForm from "./components/InvoiceForm";
 import { invoiceSchema } from "./schema";
 import { CreateInvoiceValues } from "./types";
-import { useTimberClient } from "providers/TimberProvider";
+import { useTimberClient } from "@providers/TimberProvider";
 import Form from "@components/atomic/Form";
 
 function AddInvoice() {

@@ -13,7 +13,7 @@ import { AddExpenseFormProps, ExpenseFormData } from "./types";
 import ChooseCategory from "./components/ChooseCategory";
 import AddCategoryModal from "./components/AddCategoryModal";
 import Form from "@components/atomic/Form";
-import { useTimberClient } from "providers/TimberProvider";
+import { useTimberClient } from "@providers/TimberProvider";
 
 export const AddExpenseForm: React.FC<AddExpenseFormProps> = ({
   customPaymentMethods,

@@ -6,7 +6,7 @@ import ReactQuill from "react-quill-new";
 
 import "react-quill-new/dist/quill.snow.css";
 import { CreateInvoiceValues } from "../types";
-import EditPenIcon from "assets/icons/EditPenIcon";
+import EditPenIcon from "@assets/icons/EditPenIcon";
 
 // import { getInvoiceTemplates } from '../../api/invoice';
 // import { CreateInvoiceValues } from '../../types';
