@@ -11,13 +11,40 @@ import { invoiceSchema } from "./schema";
 import { CreateInvoiceValues } from "./types";
 import { useTimberClient } from "@providers/TimberProvider";
 import Form from "@components/atomic/Form";
+import { useQuery } from "@tanstack/react-query";
 
 function AddInvoice() {
-  document.title = "Create Invoice | Timber";
   const timberClient = useTimberClient();
-  const [company, setCompany] = useState<any>({});
 
-  const [pendingInvoice, setPendingInvoice] = useState(null);
+  const {
+    data: company,
+    isPending,
+    isError,
+  } = useQuery({
+    queryKey: ["company"],
+    queryFn: () => timberClient.company.get(),
+    select: (res: any) => res.data.data,
+    enabled: !!timberClient,
+  });
+
+  const addCustomerModal = useDisclosure();
+  const editCustomerModal = useDisclosure();
+  const [role, setRole] = useState<"biller" | "customer">("customer");
+  const [selectedUser, setSelectedUser] = useState();
+
+  if (!timberClient) {
+    return <div>Loading Timber Client...</div>;
+  }
+  if (isPending) {
+    return <div>Loading...</div>;
+  }
+  if (isError) {
+    return <div>Error loading company data.</div>;
+  }
+  if (!company) {
+    return <div>No company data found.</div>;
+  }
+
   const AddInvoiceInitialValues: CreateInvoiceValues = {
     mode: "create",
     company: company?._id || "",
@@ -71,11 +98,6 @@ function AddInvoice() {
     logo: company?.logo || null,
   };
 
-  const addCustomerModal = useDisclosure();
-  const editCustomerModal = useDisclosure();
-  const [role, setRole] = useState<"biller" | "customer">("customer");
-  const [selectedUser, setSelectedUser] = useState();
-
   const handleSubmit = async (values: any) => {
     const payload = {
       ...values,
@@ -103,7 +125,7 @@ function AddInvoice() {
                 isLoading={formState.isSubmitting}
                 type="submit"
               >
-                Create Invoice
+                Create Invoice123
               </Button>
             </div>
           </div>

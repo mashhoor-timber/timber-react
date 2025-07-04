@@ -36,7 +36,6 @@ function InvoiceTitle() {
             <DropdownMenu
                 disallowEmptySelection
                 aria-label="Invoice Type selection"
-                color="text"
                 selectedKeys={selectedOption}
                 selectionMode="single"
                 variant="flat"
