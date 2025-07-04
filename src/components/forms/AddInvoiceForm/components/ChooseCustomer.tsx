@@ -29,7 +29,7 @@ function ChooseCustomer({
   } = useQuery({
     queryKey: ["company"],
     queryFn: () => timberClient.company.get(),
-    select: (res) => res.data.data,
+    select: (res) => res.data,
     enabled: !!timberClient,
   });
 

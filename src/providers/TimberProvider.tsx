@@ -1,8 +1,5 @@
 import React, { createContext, useContext, ReactNode, useMemo } from "react";
-import { createClient } from "timber-node";
-
-// Import the TimberClient type from timber-node
-type TimberClient = ReturnType<typeof createClient>;
+import { createClient, TimberClientType } from "timber-node";
 
 export interface TimberConfig {
   baseUrl?: string;
@@ -11,7 +8,7 @@ export interface TimberConfig {
 
 // Create separate contexts for config and client
 const TimberConfigContext = createContext<TimberConfig | null>(null);
-const TimberClientContext = createContext<TimberClient | null>(null);
+const TimberClientContext = createContext<TimberClientType | null>(null);
 
 export interface TimberProviderProps {
   config: TimberConfig;

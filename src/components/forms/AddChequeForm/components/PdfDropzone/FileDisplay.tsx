@@ -38,7 +38,7 @@ export default function FileDisplay({
       await timberClient.cheque.create({
         file: fileToUpload,
         progressCallback: setProgress,
-        cancelToken: cancelTokenRef.current,
+        cancelToken: cancelTokenRef.current.token,
       });
       setFiles([]);
       onSuccess?.();
@@ -49,7 +49,7 @@ export default function FileDisplay({
     }
   };
 
-  const [progress, setProgress] = useState(0);
+  const [progress, setProgress] = useState<any>(0);
   const startTimeRef = useRef<number>(0);
   const cancelTokenRef = useRef<CancelTokenSource>(axios.CancelToken.source());
   const currentFileRef = useRef<FileWithId | null>(null);

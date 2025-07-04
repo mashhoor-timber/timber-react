@@ -23,7 +23,7 @@ export const AddEmployeeForm: React.FC<AddEmployeeFormProps> = ({
     mobile: "",
     basic_salary: 0,
     allowance: 0,
-    joining_date: null as string | null,
+    joining_date: "",
     country_code: "+971",
     is_active: true,
   };

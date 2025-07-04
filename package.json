@@ -53,6 +53,7 @@
     "@storybook/react-vite": "^9.0.15",
     "@svgr/rollup": "^8.1.0",
     "@tanstack/react-query": "^5.81.5",
+    "axios": "^1.10.0",
     "clsx": "^2.0.0",
     "date-fns": "^2.0.0",
     "react-dropzone": "^14.3.8",
@@ -63,7 +64,7 @@
     "rollup-plugin-dts": "^6.2.1",
     "rollup-plugin-strip": "^1.2.2",
     "sonner": "^2.0.5",
-    "timber-node": "^0.1.0",
+    "timber-node": "^0.1.7",
     "use-debounce": "^10.0.5",
     "uuid": "^11.1.0",
     "yup": "1.4.0"

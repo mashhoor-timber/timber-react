@@ -8,7 +8,7 @@ export type EmployeeFormData = {
   allowance: number;
   designation: string;
   is_active: boolean;
-  joining_date: null | string;
+  joining_date: string;
   total_salary?: number;
 };
 

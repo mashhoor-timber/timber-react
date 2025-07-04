@@ -27,7 +27,7 @@ export default function SelectCategory({
   ...props
 }: Props) {
   const [selected, setSelected] = useState<string | null>(selectedKey || null);
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState<string>("");
   const [categoryData, setCategoryData] = useState<ExpenseCategory[]>([]);
   const [loading, setLoading] = useState(false);
 
@@ -37,7 +37,13 @@ export default function SelectCategory({
     const fetchData = async () => {
       try {
         setLoading(true);
-        const data = await timberClient.expenseCategory.list({ search: query });
+        const data = await timberClient.expenseCategory.list({
+          search: query,
+          page: 1,
+          limit: 10,
+          sort: "",
+          filters: "",
+        });
         setCategoryData(data?.data?.expense_categories || []);
       } catch (error) {
         console.error("Error fetching categories:", error);
