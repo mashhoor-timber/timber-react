@@ -10,7 +10,8 @@ if (typeof window !== "undefined") {
 
 const decorators = [
   (Story, context) => {
-    const apiToken = context.args?.apiToken || context.globals.apiToken;
+    // Get token from args (Controls panel) or globals
+    const apiToken = context.args?.apiToken || context.globals?.apiToken;
 
     if (apiToken && apiToken !== globalApiToken) {
       globalApiToken = apiToken;
@@ -20,7 +21,7 @@ const decorators = [
     }
 
     const config = {
-      apiKey: apiToken || globalApiToken,
+      apiKey: apiToken || globalApiToken || "demo-token-please-enter-real-token",
     };
 
     return (
@@ -92,26 +93,8 @@ const preview = {
         type: "text",
       },
       table: {
-        category: "API Configuration",
-      },
-    },
-  },
-  globalTypes: {
-    apiToken: {
-      description: "Enter your Timber API token (saved in localStorage)",
-      defaultValue: globalApiToken,
-      control: {
-        type: "text",
-      },
-      toolbar: {
-        title: "API Token",
-        icon: "key",
-        items: [
-          { value: "", title: "Clear Token" },
-          { value: "", title: "Use Demo Token" },
-        ],
-        dynamicTitle: true,
-        showName: true,
+        category: "Global Configuration",
+        defaultValue: { summary: "From localStorage" },
       },
     },
   },
