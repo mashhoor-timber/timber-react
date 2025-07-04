@@ -8,7 +8,7 @@ import {
 
 import { ExpenseCategory } from "../types";
 import CategoriesIcon from "../../../../assets/icons/CategoriesIcon";
-import { useTimberClient } from "providers/TimberProvider";
+import { useTimberClient } from "@providers/TimberProvider";
 
 interface Props extends Omit<AutocompleteProps, "children"> {
   buttonOnClick: () => void;

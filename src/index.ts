@@ -35,3 +35,5 @@ export type {
 
 // Export provider
 export { TimberProvider, useTimberConfig } from "./providers/TimberProvider";
+
+export { AddInvoice } from "./components/forms/AddInvoice";

@@ -1,4 +1,4 @@
-import { InputProps, Input as NextInput } from "@heroui/input";
+import { InputProps, Input as NextInput } from "@heroui/react";
 import { Spinner } from "@heroui/react";
 import { useController, useFormContext } from "react-hook-form";
 interface CustomInputProps extends InputProps {

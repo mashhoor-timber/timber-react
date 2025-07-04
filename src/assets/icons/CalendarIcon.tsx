@@ -1,4 +1,4 @@
-export default function CalendarIcon({
+export default function UploadIcon({
   width = 16,
   height = 16,
   className,
