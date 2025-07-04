@@ -31,6 +31,9 @@ export interface TimberClient {
   bankStatement: {
     create: (payload: any) => Promise<any>;
   };
+  cheque: {
+    create: (payload: any) => Promise<any>;
+  };
   // ...other properties
 }
 
