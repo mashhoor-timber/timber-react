@@ -7,4 +7,4 @@ export { AddChequeForm } from "./components/forms/AddChequeForm";
 // Export provider
 export { TimberProvider, useTimberConfig } from "./providers/TimberProvider";
 
-export { AddInvoice } from "./components/forms/AddInvoice";
+export { AddInvoice } from "./components/forms/AddInvoiceForm";

@@ -17,6 +17,8 @@ import {
 
 import AddUserIcon from "@assets/icons/AddUserIcon";
 import ProfileIcon from "@assets/icons/ProfileIcon";
+import { useTimberClient } from "@providers/TimberProvider";
+import { useQuery } from "@tanstack/react-query";
 
 interface Props extends Omit<AutocompleteProps, "children"> {
   buttonOnClick: () => void;
@@ -35,25 +37,21 @@ export default function SelectCustomer({
   const [selected, setSelected] = React.useState<any>(null);
 
   const [query, setQuery] = useState("");
-  // const { data, isFetching, isError } = useQuery({
-  //     queryFn: () => queryFn({ page: 1, limit: 100, search: query }),
-  //     queryKey: ['allInvoiceCustomers', query, queryKey],
-  // });
+  const timberClient = useTimberClient();
+  const { data, isFetching, isError } = useQuery({
+    queryKey: ["allInvoiceCustomers"],
+    queryFn: () => timberClient.customer.list(),
+    select: (res: any) => res.data.data as InvoiceCustomerResponse,
+  });
 
   // const { data: suggestedCustomersData } = useQuery({
-  //     queryFn: suggestedQueryFn,
-  //     queryKey: ['suggestedCustomers', queryKey],
+  //   queryKey: ['suggestedCustomers'],
+  //     queryFn: () => timberClient.customer.suggestedCustomers(),
   // });
 
   const suggestedCustomersData: SuggestedCustomerResponse = {
     suggested_customers: [],
   };
-  const data: InvoiceCustomerResponse = {
-    invoice_customers: [],
-    total: 0,
-  };
-  const isFetching = false;
-  const isError = false;
 
   const selectedCustomer = useMemo(
     () => data?.invoice_customers.find((item) => item._id === selected),
@@ -115,7 +113,7 @@ export default function SelectCustomer({
                   width={32}
                 />
               ) : (
-                <ProfileIcon />
+                <ProfileIcon width={24} height={24} />
               )}
               <span className="truncate">{item.name}</span>
             </div>
@@ -155,7 +153,7 @@ export default function SelectCustomer({
                   width={32}
                 />
               ) : (
-                <ProfileIcon />
+                <ProfileIcon width={18} height={18}/>
               )}
               <span className="truncate">{item.name}</span>
             </div>

@@ -1,40 +1,12 @@
 import React, { createContext, useContext, ReactNode, useMemo } from "react";
 import { createClient } from "timber-node";
 
+// Import the TimberClient type from timber-node
+type TimberClient = ReturnType<typeof createClient>;
+
 export interface TimberConfig {
   baseUrl?: string;
   apiKey: string;
-}
-
-export interface TimberClient {
-  expense: {
-    create: (payload: any) => Promise<any>;
-    // ...other methods
-  };
-  expenseCategory: {
-    create: (payload: any) => Promise<any>;
-    list: (payload: any) => Promise<any>;
-  };
-  invoice: {
-    create: (payload: any) => Promise<any>;
-    list: (payload: any) => Promise<any>;
-    get(id: string): Promise<any>;
-  };
-  customer: {
-    create: (payload: any) => Promise<any>;
-    list: (payload: any) => Promise<any>;
-  };
-  employee: {
-    create: (payload: any) => Promise<any>;
-    list: (payload: any) => Promise<any>;
-  };
-  bankStatement: {
-    create: (payload: any) => Promise<any>;
-  };
-  cheque: {
-    create: (payload: any) => Promise<any>;
-  };
-  // ...other properties
 }
 
 // Create separate contexts for config and client
