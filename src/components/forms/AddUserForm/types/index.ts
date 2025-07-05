@@ -8,7 +8,7 @@ export type UserFormData = {
   address: string;
   trn?: string;
   role: "customer" | "vendor" | "biller";
-  logo?: File | null;
+  logo?: any | null;
 };
 
 export type AddUserFormProps = {

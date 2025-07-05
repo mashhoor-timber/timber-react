@@ -10,7 +10,7 @@ import Form from "@components/atomic/Form";
 
 import MobileNumberInput from "@components/atomic/MobileNumberInput";
 import Select, { SelectItem } from "@components/atomic/Select";
-import { useTimberClient } from "providers/TimberProvider";
+import { useTimberClient } from "@providers/TimberProvider";
 
 export const AddUserForm: React.FC<AddUserFormProps> = ({
   onSuccess,
@@ -22,6 +22,7 @@ export const AddUserForm: React.FC<AddUserFormProps> = ({
     try {
       const payload: UserFormData = {
         ...values,
+        logo:values.logo?values.logo[0]:null
       };
       await timberClient.customer.create(payload);
       onSuccess?.();
@@ -38,7 +39,6 @@ export const AddUserForm: React.FC<AddUserFormProps> = ({
     country: "",
     city: "",
     address: "",
-    trn: "",
     role: "customer",
   };
 
