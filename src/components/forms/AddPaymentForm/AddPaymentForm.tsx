@@ -12,7 +12,7 @@ import { formatCurrency } from '../../../utils/formatting';
 import { addPaymentRecordSchema } from './schema';
 
 
-import { useTimberClient } from 'providers/TimberProvider';
+import { useTimberClient } from '@providers/TimberProvider';
 import { useEffect, useState } from 'react';
 import ChequeDetails from './components/ChequeDetails';
 // import WafeqWarning from './components/WafeqWarning';
@@ -42,7 +42,11 @@ const fetchMethodMap = {
 export const AddPaymentForm:React.FC <AddPaymentFormProps> = ({ invoiceID, type = 'invoice' }) => {
   const [invoice, setInvoice] = useState<Invoice | VendorPayment | undefined>();
   const timberClient = useTimberClient();
-  const createMethod = clientCreateMethodMap[type as 'invoice' | 'bill'](timberClient);
+  const createMethod = clientCreateMethodMap[type];
+if (!createMethod) {
+  throw new Error(`Invalid payment type: ${type}`);
+}
+const method = createMethod(timberClient);
 
   useEffect(() => {
     const fetchInvoice = async () => {
@@ -63,16 +67,16 @@ export const AddPaymentForm:React.FC <AddPaymentFormProps> = ({ invoiceID, type 
     payment_method: 'bank',
     date: parseDate(format(new Date(), 'yyyy-MM-dd')),
     cheque_no: '',
-    cheque_date: parseDate(format(new Date(), 'yyyy-MM-dd')),
-    cheque_due_date: parseDate(format(new Date(), 'yyyy-MM-dd')),
-    file: [],
+    // cheque_date: parseDate(format(new Date(), 'yyyy-MM-dd')),
+    // cheque_due_date: parseDate(format(new Date(), 'yyyy-MM-dd')),
   };
 
   const handleSubmit = async (values: any) => {
-    await timberClient.billPayment.create({
+    console.log(values,"values")
+    await method({
       ...values,
       date: values?.date?.toISOString(),
-      file: values?.file ? values?.file[0] : null,
+      file: values?.file ? values?.file[0] : null, 
       cheque_due_date: values?.cheque_due_date?.toISOString(),
     });
   };
