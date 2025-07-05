@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { AddExpenseForm } from "../index";
+import { FC } from "react";
 
 const meta: Meta<typeof AddExpenseForm> = {
   title: "Forms/AddExpenseForm",
@@ -13,7 +14,7 @@ const meta: Meta<typeof AddExpenseForm> = {
       },
     },
   },
-  decorators: [(Story) => <Story />],
+  decorators: [(Story: FC) => <Story />],
   tags: ["autodocs"],
 };
 

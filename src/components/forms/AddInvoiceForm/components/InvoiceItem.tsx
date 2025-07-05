@@ -105,7 +105,6 @@ function InvoiceItem({ id, index, items, onRemove, vats }: Props) {
         </div>
         <div className="col-span-1">
           <Select 
-            color="white"
             errorMessage=""
             label=""
             name={`items[${index}].vat`}

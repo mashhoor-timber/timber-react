@@ -2,7 +2,6 @@ import { SelectItem, SharedSelection } from "@heroui/react";
 import { useController, useFormContext } from "react-hook-form";
 
 import SelectStyled, { SelectStyledProps } from "./SelectStyled";
-
 interface CustomSelectProps extends SelectStyledProps {
   name?: string;
   className?: string;
