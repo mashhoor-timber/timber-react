@@ -9,23 +9,21 @@ if (typeof window !== "undefined") {
   globalApiToken = localStorage.getItem("storybook-api-token") || "";
 }
 
-// Create a single QueryClient instance with proper configuration for Storybook
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      retry: false, // Don't retry failed requests in Storybook
-      staleTime: 1000 * 60 * 5, // 5 minutes
-      refetchOnWindowFocus: false, // Don't refetch on window focus in Storybook
+      retry: false,
+      staleTime: 1000 * 60 * 5,
+      refetchOnWindowFocus: false,
     },
     mutations: {
-      retry: false, // Don't retry failed mutations in Storybook
+      retry: false,
     },
   },
 });
 
 const decorators = [
   (Story, context) => {
-    // Get token from args (Controls panel) or globals
     const apiToken = context.args?.apiToken || context.globals?.apiToken;
 
     if (apiToken && apiToken !== globalApiToken) {
@@ -80,7 +78,7 @@ const parameters = {
     dark: {
       ...themes.dark,
       appBorderRadius: 14,
-      brandTitle: "HeroUI",
+      brandTitle: "Timber",
       brandUrl: "https://app.timber.me",
       brandTarget: "_self",
       brandImage: "/logo.png",
@@ -88,7 +86,7 @@ const parameters = {
     light: {
       ...themes.light,
       appBorderRadius: 14,
-      brandTitle: "HeroUI",
+      brandTitle: "Timber",
       brandUrl: "https://app.timber.me",
       brandTarget: "_self",
       brandImage: "/logo.png",
@@ -106,13 +104,11 @@ const preview = {
   argTypes: {
     apiToken: {
       name: "API Token",
-      description: "Enter your Timber API token (saved in localStorage)",
       control: {
         type: "text",
       },
       table: {
         category: "Global Configuration",
-        defaultValue: { summary: "From localStorage" },
       },
     },
   },

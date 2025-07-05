@@ -1,9 +1,147 @@
-import {Meta} from "@storybook/addon-docs";
 
-<Meta title="Welcome" />
+<div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '2rem' }}>
+  <img src="/logo.png" alt="Timber Logo" style={{ height: '32px' }} />
+</div>
 
-<br />
+# Welcome to Timber Component Library for React
 
-# Timber Component Library 👋🏼
+---
 
-<br />
+## 🚀 Getting Started
+
+Timber Component Library is a comprehensive React component library designed to help you build beautiful, functional applications quickly and efficiently. Our components are built with modern React patterns, TypeScript support, and accessibility in mind.
+
+### Installation
+
+```bash
+yarn add timber-react-dev
+```
+
+### Usage
+
+```tsx
+import { TimberProvider, AddExpenseForm } from 'timber-react-dev';
+
+const config = {
+    baseUrl: <base_url_here>,
+    apiKey: <api_key_here>
+}
+
+function App() {
+  return (
+    <TimberProvider config={config}>
+      <AddExpenseForm onSubmit={(data) => console.log(data)} />
+    </TimberProvider>
+  );
+}
+```
+
+---
+
+## 📦 Component Categories
+
+### 📋 Form Components
+- **AddExpenseForm** - Complete expense entry form
+- **AddUserForm** - User registration/creation form
+- **AddEmployeeForm** - Employee information form
+- **AddStatementForm** - Financial statement form
+- **AddChequeForm** - Cheque details form
+- **AddInvoiceForm** - Invoice creation form
+
+---
+
+## 🎨 Features
+
+<div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1.5rem', margin: '2rem 0' }}>
+  <div style={{ padding: '1.5rem', border: '1px solid #E2E8F0', borderRadius: '8px', backgroundColor: '#F7FAFC' }}>
+    <h3 style={{ margin: '0 0 1rem 0', color: '#2D3748' }}>🎯 TypeScript First</h3>
+    <p style={{ margin: 0, color: '#4A5568' }}>
+      Built with TypeScript for better developer experience and type safety.
+    </p>
+  </div>
+  
+  <div style={{ padding: '1.5rem', border: '1px solid #E2E8F0', borderRadius: '8px', backgroundColor: '#F7FAFC' }}>
+    <h3 style={{ margin: '0 0 1rem 0', color: '#2D3748' }}>♿ Accessible</h3>
+    <p style={{ margin: 0, color: '#4A5568' }}>
+      Components follow WCAG guidelines for accessibility and keyboard navigation.
+    </p>
+  </div>
+  
+  <div style={{ padding: '1.5rem', border: '1px solid #E2E8F0', borderRadius: '8px', backgroundColor: '#F7FAFC' }}>
+    <h3 style={{ margin: '0 0 1rem 0', color: '#2D3748' }}>🎨 Customizable</h3>
+    <p style={{ margin: 0, color: '#4A5568' }}>
+      Easy to customize with CSS variables and theming support.
+    </p>
+  </div>
+  
+  <div style={{ padding: '1.5rem', border: '1px solid #E2E8F0', borderRadius: '8px', backgroundColor: '#F7FAFC' }}>
+    <h3 style={{ margin: '0 0 1rem 0', color: '#2D3748' }}>📱 Responsive</h3>
+    <p style={{ margin: 0, color: '#4A5568' }}>
+      Mobile-first design with responsive layouts out of the box.
+    </p>
+  </div>
+</div>
+
+---
+
+## 📚 Documentation
+
+Navigate through the sidebar to explore individual components. Each component includes:
+
+- **Props documentation** - Complete API reference
+- **Interactive examples** - Live component playground
+- **Usage patterns** - Common implementation scenarios
+- **Accessibility notes** - WCAG compliance information
+
+---
+
+## 🛠️ Development
+
+### Prerequisites
+- Node.js 16+ 
+- Yarn package manager
+
+### Local Development
+```bash
+# Install dependencies
+yarn install
+
+# Start Storybook
+yarn storybook
+
+# Build library
+yarn build
+```
+
+---
+
+## 🤝 Contributing
+
+We welcome contributions! Please see our [GitHub repository](https://github.com/mashhoor-timber/timber-react) for guidelines.
+
+---
+
+## 📄 License
+
+MIT License - see LICENSE file for details.
+
+---
+
+<div style={{ textAlign: 'center', padding: '2rem', backgroundColor: '#F7FAFC', borderRadius: '8px', marginTop: '2rem' }}>
+  <h3 style={{ margin: '0 0 1rem 0', color: '#2D3748' }}>Ready to get started?</h3>
+  <p style={{ margin: '0 0 1rem 0', color: '#4A5568' }}>
+    Explore the components in the sidebar or check out our complete documentation.
+  </p>
+  <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+    <a href="https://github.com/mashhoor-timber/timber-react" style={{ 
+      padding: '0.5rem 1rem', 
+      backgroundColor: '#3182CE', 
+      color: 'white', 
+      textDecoration: 'none', 
+      borderRadius: '6px',
+      fontWeight: 'bold'
+    }}>
+      View on GitHub
+    </a>
+  </div>
+</div>
