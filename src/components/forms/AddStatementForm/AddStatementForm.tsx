@@ -126,7 +126,7 @@ export const AddStatementForm: React.FC<AddStatementFormProps> = ({
   return (
     <div
       {...getRootProps()}
-      className={`w-full h-full p-1 custom-dashed bg-light flex flex-col justify-center items-center text-default-700 cursor-pointer ${
+      className={`w-full h-full p-1 border border-1 rounded-lg bg-light flex flex-col justify-center items-center text-default-700 cursor-pointer ${
         isDragActive ? "bg-primary-50" : ""
       }`}
     >
