@@ -16,8 +16,10 @@ import { useTimberClient } from 'providers/TimberProvider';
 import { useEffect, useState } from 'react';
 import ChequeDetails from './components/ChequeDetails';
 // import WafeqWarning from './components/WafeqWarning';
-import { AddPaymentFormProps, Invoice } from './types';
+import { AddPaymentFormProps } from './types';
 import BankDetails from './components/BankDetails';
+import { VendorPayment } from 'timber-node/dist/vendorPayment';
+import { Invoice } from 'timber-node/dist/invoice';
 
 const paidViaOptions = [
     { label: 'Bank', value: 'bank' },
@@ -38,7 +40,7 @@ const fetchMethodMap = {
 } as const;
 
 export const AddPaymentForm:React.FC <AddPaymentFormProps> = ({ invoiceID, type = 'invoice' }) => {
-  const [invoice, setInvoice] = useState<Invoice | undefined>();
+  const [invoice, setInvoice] = useState<Invoice | VendorPayment | undefined>();
   const timberClient = useTimberClient();
   const createMethod = clientCreateMethodMap[type as 'invoice' | 'bill'](timberClient);
 
