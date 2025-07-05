@@ -45,8 +45,7 @@ export const AddPaymentForm:React.FC <AddPaymentFormProps> = ({ invoiceID, type 
   useEffect(() => {
     const fetchInvoice = async () => {
       const response = await fetchMethodMap[type](timberClient, invoiceID);
-      console.log(response?.data?.data,"invoice")
-      setInvoice(response?.data?.data);
+      setInvoice(response?.data);
     };
     fetchInvoice();
   }, [invoiceID]);

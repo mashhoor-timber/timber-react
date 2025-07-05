@@ -64,7 +64,7 @@
     "rollup-plugin-dts": "^6.2.1",
     "rollup-plugin-strip": "^1.2.2",
     "sonner": "^2.0.5",
-    "timber-node": "^0.1.9",
+    "timber-node": "^0.2.0",
     "use-debounce": "^10.0.5",
     "uuid": "^11.1.0",
     "yup": "1.4.0"
