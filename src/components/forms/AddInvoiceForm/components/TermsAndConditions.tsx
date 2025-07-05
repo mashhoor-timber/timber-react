@@ -7,13 +7,12 @@ import ReactQuill from "react-quill-new";
 import "react-quill-new/dist/quill.snow.css";
 import { CreateInvoiceValues } from "../types";
 import EditPenIcon from "@assets/icons/EditPenIcon";
-
-// import { getInvoiceTemplates } from '../../api/invoice';
-// import { CreateInvoiceValues } from '../../types';
-// import EditTermsNotesModal from '../EditTermsNotesModal';
+import EditTermsNotesModal from "./EditTermsNotesModal";
+import { useQuery } from "@tanstack/react-query";
+import { useTimberClient } from "@providers/TimberProvider";
 
 const modules = {
-  toolbar: false, // Hide toolbar if only displaying content
+  toolbar: false,
   clipboard: { matchVisual: false },
   history: { delay: 2000, maxStack: 500, userOnly: true },
 };
@@ -31,7 +30,6 @@ const formats = [
 ];
 
 function TermsAndConditions() {
-  // const company = useAppSelector(state => state.company);
   const { control, setValue } = useFormContext<CreateInvoiceValues>();
 
   const {
@@ -59,31 +57,12 @@ function TermsAndConditions() {
   const [type, setType] = useState<"terms" | "notes">("terms");
   const editModal = useDisclosure();
 
-  // const { data, isLoading } = useQuery({
-  //     queryKey: ['invoiceTemplates', company?._id],
-  //     queryFn: () => getInvoiceTemplates({ company: company?._id }),
-  // });
-
-  // Mock data for demonstration purposes
-  const data = {
-    invoice_template: {
-      terms: [
-        {
-          _id: "term1",
-          name: "Standard Terms",
-          content: "These are the standard terms and conditions.",
-        },
-      ],
-      notes: [
-        {
-          _id: "note1",
-          name: "Important Note",
-          content: "This is an important note for the invoice.",
-        },
-      ],
-    },
-  };
-  const isLoading = false;
+  const timberClient = useTimberClient();
+  const { data, isLoading } = useQuery({
+      queryKey: ['invoiceTemplates'],
+      queryFn: () => timberClient.invoiceTemplate.list({}),
+      select: (res) => res.data.data,
+  });
 
   if (mode === "create") {
     const latestTerm = data?.invoice_template.terms?.[0]?.content || "";
@@ -181,7 +160,7 @@ function TermsAndConditions() {
         />
       </div>
 
-      {/* {editModal.isOpen ? (
+      {editModal.isOpen ? (
                 <EditTermsNotesModal
                     documentId={data?.invoice_template?._id}
                     isOpen={editModal.isOpen}
@@ -190,7 +169,7 @@ function TermsAndConditions() {
                     type={type}
                     onClose={editModal.onClose}
                 />
-            ) : null} */}
+            ) : null}
     </>
   );
 }

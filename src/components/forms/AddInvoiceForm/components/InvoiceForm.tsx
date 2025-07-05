@@ -11,6 +11,7 @@ import CurrencyPicker from "@components/atomic/CurrencyPicker";
 import InvoiceItems from "./InvoiceItems";
 import TermsAndConditions from "./TermsAndConditions";
 import Totals from "./Totals";
+import AddInvoiceUserModal from "./AddInvoiceUserModal";
 
 const uaePlacesOfSupply = [
   { value: "AB", label: "Abu Dhabi" },
@@ -172,13 +173,13 @@ function InvoiceForm({ setRole, setSelectedUser }: InvoiceFormProps) {
       </div>
       <Spacer y={3} />
 
-      {/* {addCustomerModal.isOpen ? (
+      {addCustomerModal.isOpen ? (
                 <AddInvoiceUserModal
                     isOpen={addCustomerModal.isOpen}
                     userRole="customer"
                     onClose={addCustomerModal.onClose}
                 />
-            ) : null} */}
+            ) : null}
     </>
   );
 }

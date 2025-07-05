@@ -12,6 +12,7 @@ import Input from "@components/atomic/Input";
 import { CreateInvoiceValues } from "../types";
 // import InvoiceNumberSettingsModal from "../InvoiceNumberSettingsModal";
 import SettingsIcon from "@assets/icons/SettingsIcon";
+import InvoiceNumberSettingsModal from "./InvoiceNumberSettingsModal";
 
 export default function InvoiceNumberInput() {
   const invoiceNumberSettingsModal = useDisclosure();
@@ -71,12 +72,12 @@ export default function InvoiceNumberInput() {
           <span className="text-sm whitespace-nowrap">Invoice No: </span>
         }
       />
-      {/* {invoiceNumberSettingsModal.isOpen ? (
+      {invoiceNumberSettingsModal.isOpen ? (
                 <InvoiceNumberSettingsModal
                     isOpen={invoiceNumberSettingsModal.isOpen}
                     onClose={invoiceNumberSettingsModal.onClose}
                 />
-            ) : null} */}
+            ) : null}
     </>
   );
 }
