@@ -1,5 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import AddInvoice from "..";
+import { AddInvoice } from "..";
+import { toast } from "sonner";
+import { FC } from "react";
+import { Invoice } from "../types";
 
 const meta: Meta<typeof AddInvoice> = {
   title: "Forms/AddInvoice",
@@ -13,7 +16,7 @@ const meta: Meta<typeof AddInvoice> = {
       },
     },
   },
-  decorators: [(Story) => <Story />],
+  decorators: [(Story: FC) => <Story />],
   tags: ["autodocs"],
 };
 
@@ -21,6 +24,12 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
+  args: {
+    onSuccess: (values: Invoice) => {
+      console.log("Invoice created successfully:", values);
+      toast.success("Invoice created successfully!");
+    },
+  },
   parameters: {
     docs: {
       description: {

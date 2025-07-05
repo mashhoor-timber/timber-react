@@ -8,3 +8,11 @@
   font-weight: 100 900;
   font-style: normal;
 }
+
+.brd {
+  border: 1px solid red;
+}
+
+.brda > * {
+  border: 1px solid red;
+}

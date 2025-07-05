@@ -1,21 +1,24 @@
-import { extendVariants, Select, type VariantProps } from "@heroui/react";
+import {
+  extendVariants,
+  Select,
+  SelectProps,
+  VariantProps,
+} from "@heroui/react";
 
-const SelectStyled: ReturnType<typeof extendVariants> = extendVariants(Select, {
+const SelectStyled = extendVariants(Select, {
   variants: {
     color: {
       white: {
-        base: "group bg-background",
+        base: "group",
         trigger:
-          "border bg-background data-[hover=true]:bg-background data-[hover=true]:border-default-400",
-        value: "text-sm placeholder:text-sm placeholder:text-default-500",
-        popoverContent: "bg-background",
-        label: "text-sm mt-1 font-medium",
+          "h-[42px] border border-divider bg-light group-hover:border-primary",
+        label: "font-medium",
       },
       transparent: {
         innerWrapper: "w-auto",
-        base: "group bg-background",
+        base: "group",
         trigger:
-          "shadow-none border border-divider bg-transparent data-[hover=true]:bg-transparent group-hover:border-primary w-fit pe-8",
+          "h-[40px] shadow-none border border-divider bg-transparent group-hover:border-primary w-fit pe-8",
         label: "font-medium text-danger",
         listbox: "whitespace-nowrap",
       },
@@ -23,11 +26,11 @@ const SelectStyled: ReturnType<typeof extendVariants> = extendVariants(Select, {
   },
   defaultVariants: {
     color: "white",
-    radius: "sm",
-    size: "lg",
+    radius: "md",
+    size: "md",
   },
 });
 
-export default SelectStyled;
+export default SelectStyled
 
 export type SelectStyledProps = VariantProps<typeof SelectStyled>;
