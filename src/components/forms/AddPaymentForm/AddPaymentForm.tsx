@@ -1,5 +1,4 @@
 import { format } from 'date-fns';
-import { useForm } from 'react-hook-form';
 
 import Button from '@components/atomic/Button';
 import { parseDate } from '@internationalized/date';
@@ -13,13 +12,14 @@ import { addPaymentRecordSchema } from './schema';
 
 
 import { useTimberClient } from '@providers/TimberProvider';
-import { useEffect, useState } from 'react';
 import ChequeDetails from './components/ChequeDetails';
 // import WafeqWarning from './components/WafeqWarning';
 import { AddPaymentFormProps } from './types';
+import { useQuery } from "@tanstack/react-query";
 import BankDetails from './components/BankDetails';
-import { VendorPayment } from 'timber-node/dist/vendorPayment';
-import { Invoice } from 'timber-node/dist/invoice';
+
+import { Spinner } from '@heroui/react';
+import { toast } from 'sonner';
 
 const paidViaOptions = [
     { label: 'Bank', value: 'bank' },
@@ -40,25 +40,43 @@ const fetchMethodMap = {
 } as const;
 
 export const AddPaymentForm:React.FC <AddPaymentFormProps> = ({ invoiceID, type = 'invoice' }) => {
-  const [invoice, setInvoice] = useState<Invoice | VendorPayment | undefined>();
   const timberClient = useTimberClient();
+  const {data:invoice,isLoading,isError} = useQuery({
+    queryKey:['invoice',invoiceID,type],
+    queryFn:()=>fetchMethodMap[type](timberClient,invoiceID),
+    select:(res:any)=>res.data.data,
+    enabled:!!invoiceID
+  });
   const createMethod = clientCreateMethodMap[type];
 if (!createMethod) {
   throw new Error(`Invalid payment type: ${type}`);
 }
-const method = createMethod(timberClient);
+const method = createMethod(timberClient).bind(
+  type === 'invoice' ? timberClient.invoicePayment : timberClient.billPayment
+);
 
-  useEffect(() => {
-    const fetchInvoice = async () => {
-      const response = await fetchMethodMap[type](timberClient, invoiceID);
-      setInvoice(response?.data);
-    };
-    fetchInvoice();
-  }, [invoiceID]);
-
-  if (!invoice) {
-    return null;
+  // useEffect(() => {
+  //   const fetchInvoice = async () => {
+  //     const response = await fetchMethodMap[type](timberClient, invoiceID);
+  //     setInvoice(response?.data?.data);
+  //   };
+  //   fetchInvoice();
+  // }, [invoiceID,type]);
+  if(isLoading){
+    return <div className='min-h-[80vh] flex justify-center items-center'>
+      <Spinner size='lg' />
+    </div>
   }
+
+if (isError || !invoice) {
+  toast.error('Error fetching invoice');
+  return (
+    <div className="text-center mt-4">
+      Failed to load invoice/bill data make sure id is correct.
+    </div>
+  );
+}
+
 
   const defaultValues = {
     invoice: invoice._id,
@@ -72,9 +90,9 @@ const method = createMethod(timberClient);
   };
 
   const handleSubmit = async (values: any) => {
-    console.log(values,"values")
     await method({
       ...values,
+      invoice:invoice?._id,
       date: values?.date?.toISOString(),
       file: values?.file ? values?.file[0] : null, 
       cheque_due_date: values?.cheque_due_date?.toISOString(),
@@ -86,7 +104,7 @@ const method = createMethod(timberClient);
       defaultValues={defaultValues}
       schema={addPaymentRecordSchema(invoice.amount_due)}
       onSubmit={handleSubmit}
-       resetOnSubmit
+      resetOnSubmit
     >
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <SelectInputWithSearch
