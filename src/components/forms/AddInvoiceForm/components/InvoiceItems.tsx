@@ -7,6 +7,8 @@ import { v4 as uuidv4 } from 'uuid';
 import Button from '@components/atomic/Button';
 import InvoiceItem from './InvoiceItem';
 import { NewInvoiceItem } from '../types';
+import { useQuery } from '@tanstack/react-query';
+import { useTimberClient } from '@providers/TimberProvider';
 
 export default function InvoiceItems() {
     const { control } = useFormContext();
@@ -15,17 +17,13 @@ export default function InvoiceItems() {
         name: 'items',
     });
 
-    // const company = useAppSelector(state => state.company);
-    // const { data: vats } = useQuery({
-    //     queryKey: ['getTaxRates', company?._id],
-    //     queryFn: () => getTaxRates({ company: company?._id }),
-    // });
-
-    const vats = [
-        { name: 5, percentage: '5%' },
-        { name: 10, percentage: '10%' },
-        { name: 15, percentage: '15%' },
-    ];
+    const timberClient = useTimberClient();
+    const { data: vats } = useQuery({
+        queryKey: ['getTaxRates'],
+        queryFn: () => timberClient.taxRate.list(),
+        select: (res: any) => res.data.data,
+        enabled: !!timberClient,
+    });
 
     const handleDragEnd = (event: any) => {
         const { active, over } = event;
@@ -106,7 +104,7 @@ export default function InvoiceItems() {
                         id={item.id}
                         index={index}
                         items={fields as NewInvoiceItem[]}
-                        vats={vats}
+                        vats={vats?.tax_rates || []}
                         onRemove={() => remove(index)}
                     />
                 ))}

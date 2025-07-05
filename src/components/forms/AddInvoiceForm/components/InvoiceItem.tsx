@@ -51,7 +51,7 @@ function InvoiceItem({ id, index, items, onRemove, vats }: Props) {
     ),
     transition,
     display: "flex",
-    alignItems: "start",
+    alignItems: "stretch",
     backgroundColor: isDragging ? "#f5f5f5" : "#ffffff",
     position: (isDragging ? "relative" : "inherit") as "relative" | "inherit",
     zIndex: isDragging ? 1000 : 0,
@@ -77,7 +77,7 @@ function InvoiceItem({ id, index, items, onRemove, vats }: Props) {
           width={18}
         />
       </div>
-      <div className="flex-grow grid grid-cols-8 gap-2">
+      <div className="flex-grow grid grid-cols-8 gap-2 content-center">
         <div className="col-span-3">
           <InvoiceItemTitle index={index} />
         </div>
@@ -104,7 +104,7 @@ function InvoiceItem({ id, index, items, onRemove, vats }: Props) {
           />
         </div>
         <div className="col-span-1">
-          <Select
+          <Select 
             color="white"
             errorMessage=""
             label=""
@@ -149,9 +149,8 @@ function InvoiceItem({ id, index, items, onRemove, vats }: Props) {
           />
         </div>
       </div>
-      <Button
-        isIconOnly
-        className={`size-4 text-danger border-none disabled:text-default-500 hover:text-danger ${
+      <button
+        className={`w-8 min-w-8 text-danger border-none disabled:text-default-500 hover:text-danger flex items-center justify-center ${
           isDragging ? "opacity-0" : ""
         }`}
         color="transparent"
@@ -159,7 +158,7 @@ function InvoiceItem({ id, index, items, onRemove, vats }: Props) {
         onClick={() => onRemove(index)}
       >
         <MinusIcon height={16} width={16} />
-      </Button>
+      </button>
     </div>
   );
 }

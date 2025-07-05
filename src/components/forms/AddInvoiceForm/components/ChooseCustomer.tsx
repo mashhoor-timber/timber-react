@@ -1,8 +1,4 @@
 import { useFormContext } from "react-hook-form";
-
-// import { useAppSelector } from '@hooks/store';
-
-// import { allInvoiceCustomers, suggestedCustomers } from '../../api/invoiceCustomer';
 import SelectCustomer from "./SelectCustomer";
 import { InvoiceCustomer } from "../types";
 import { useQuery } from "@tanstack/react-query";
