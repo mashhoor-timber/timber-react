@@ -61,7 +61,7 @@ function TermsAndConditions() {
   const { data, isLoading } = useQuery({
       queryKey: ['invoiceTemplates'],
       queryFn: () => timberClient.invoiceTemplate.list({}),
-      select: (res) => res.data.data,
+      select: (res: any) => res.data.data,
   });
 
   if (mode === "create") {
