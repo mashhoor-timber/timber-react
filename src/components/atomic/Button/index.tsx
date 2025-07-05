@@ -26,7 +26,7 @@ const Button = extendVariants(NextButton, {
     color: {
       white:
         'bg-light border border-primary text-primary hover:text-primary hover:border-primary',
-      primary: 'bg-primary text-light hover:bg-primary',
+      primary: 'bg-primary text-light hover:bg-primary text-white',
       secondary:
         'bg-light font-medium border border-transparent text-secondary hover:text-primary hover:border-primary',
       text: 'text-primary bg-transparent',

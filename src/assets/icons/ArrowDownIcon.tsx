@@ -13,6 +13,7 @@ export default function ArrowDownIcon({
       width={width}
       height={height}
       viewBox="0 0 14 9"
+      fill="none"
       className={className}
     >
       <path

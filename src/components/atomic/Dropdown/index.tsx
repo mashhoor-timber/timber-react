@@ -15,6 +15,7 @@ const Dropdown = extendVariants(NextDropdown, {
     color: {
       default: {
         base: "p-0 rounded-2xl min-w-[150px]",
+        content: 'p-0',
       },
     },
   },
