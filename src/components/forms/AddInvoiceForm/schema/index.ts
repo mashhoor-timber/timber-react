@@ -88,3 +88,16 @@ export const invoiceSchema = Yup.object().shape({
             otherwise: schema => schema.nullable(),
         }),
 });
+
+export const invoiceNumberSchema = Yup.object().shape({
+    enabled: Yup.boolean().optional(),
+    next_number: Yup.number().required('Next number is required'),
+    sequence_length: Yup.number().required('Sequence length is required'),
+    prefix: Yup.string().trim().optional(),
+});
+
+export const invoiceTemplateSchema = Yup.object().shape({
+    company: Yup.string().trim().required('Company is required'),
+    name: Yup.string().trim().required('Name is required'),
+    content: Yup.string().trim().required('Content is required'),
+});

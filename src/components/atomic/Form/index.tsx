@@ -33,6 +33,7 @@ export default function Form({
     shouldFocusError: true,
     criteriaMode: "firstError",
     shouldUseNativeValidation: false,
+    progressive: false  
   });
 
   const { handleSubmit, reset, getValues } = methods;
