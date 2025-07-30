@@ -4,6 +4,8 @@ import { Autocomplete, AutocompleteItem } from "@heroui/react";
 import { useController, useFormContext } from "react-hook-form";
 import { useDebouncedCallback } from "use-debounce";
 import { InvoiceItemSuggestionsResponse } from "../types";
+import { useTimberClient } from "@providers/TimberProvider";
+import { useQuery } from "@tanstack/react-query";
 
 interface InvoiceItemTitleProps {
   index: number;
@@ -14,6 +16,8 @@ const DEBOUNCE_TIME = 150;
 export default function InvoiceItemTitle({ index }: InvoiceItemTitleProps) {
   const [search, setSearch] = useState<string>("");
 
+  const timberClient = useTimberClient();
+
   const { control, setValue } = useFormContext();
   const {
     field,
@@ -23,13 +27,12 @@ export default function InvoiceItemTitle({ index }: InvoiceItemTitleProps) {
     control,
   });
 
-  // const { data, isFetching } = useQuery({
-  //     queryKey: ['invoiceItemSuggestions', _id, search],
-  //     queryFn: () => getInvoiceItemSuggestions({ search, company: _id }),
-  //     enabled: !!search,
-  // });
-
-  const data: InvoiceItemSuggestionsResponse = [];
+  const { data, isFetching } = useQuery({
+      queryKey: ['invoiceItemSuggestions',search],
+      queryFn: () => timberClient.invoiceItem.suggestions({search}),
+      select: (res: any) => res?.data?.data,
+      enabled: !!search,
+  });
   const currency = "USD";
 
   const debouncedInputChange = useDebouncedCallback((value) => {
@@ -55,7 +58,7 @@ export default function InvoiceItemTitle({ index }: InvoiceItemTitleProps) {
       }}
       isClearable={false}
       isInvalid={!!error}
-      // isLoading={isFetching}
+      isLoading={isFetching}
       label=""
       labelPlacement="outside"
       placeholder="Title"
@@ -73,14 +76,14 @@ export default function InvoiceItemTitle({ index }: InvoiceItemTitleProps) {
       }}
       onSelectionChange={(value: any) => {
         if (field.value !== value) {
-          const selected = data?.find((item) => item.title === value);
+          const selected = data?.find((item:any) => item.title === value);
           if (!selected) return;
           field.onChange(value);
           setValue(`items[${index}].rate`, selected.rate[0]);
         }
       }}
     >
-      {data?.map((option) => (
+      {data?.map((option:any) => (
         <AutocompleteItem
           key={option.title}
           hideSelectedIcon
