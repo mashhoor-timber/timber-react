@@ -19,7 +19,7 @@ export default function Textarea({ name, ...props }: CustomTextareaProps) {
       {...field}
       classNames={{
         inputWrapper: `h-[60px] border border-divider`,
-        label: "font-medium pb-2",
+        label: "font-medium text-sm",
       }}
       errorMessage={error?.message as string}
       isInvalid={!!error}
