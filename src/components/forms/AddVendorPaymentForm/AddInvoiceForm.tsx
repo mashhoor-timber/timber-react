@@ -33,7 +33,7 @@ function AddInvoice({ onSuccess }: AddInvoiceProps) {
 
   const addCustomerModal = useDisclosure();
   const editCustomerModal = useDisclosure();
-  const [role, setRole] = useState<"biller" | "customer">("customer");
+  const [role, setRole] = useState<"biller" | "customer" | "vendor">("customer");
   const [selectedUser, setSelectedUser] = useState();
 
   if (!timberClient) {
@@ -101,9 +101,10 @@ function AddInvoice({ onSuccess }: AddInvoiceProps) {
     total: 0,
     amount_paid: 0,
     amount_due: 0,
+    status: 'unpaid',
     wafeq: false,
     zoho: false,
-    logo: company?.logo || null,
+    logo: null,
   };
 
   const handleSubmit = async (values: any) => {
@@ -112,7 +113,7 @@ function AddInvoice({ onSuccess }: AddInvoiceProps) {
       invoice_date: format(values.invoice_date, "yyyy-MM-dd"),
       due_date: format(values.due_date, "yyyy-MM-dd"),
     };
-    await timberClient.invoice.create(payload);
+    const invoice=await timberClient.vendorPayment.create(payload)
     if (onSuccess) onSuccess(payload);
   };
 
@@ -134,7 +135,7 @@ function AddInvoice({ onSuccess }: AddInvoiceProps) {
                 isLoading={formState.isSubmitting}
                 type="submit"
               >
-                Create Invoice
+                Submit
               </Button>
             </div>
           </div>

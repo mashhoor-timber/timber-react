@@ -2,21 +2,22 @@ import { useState } from 'react';
 
 import { useFormContext, useWatch } from 'react-hook-form';
 
-import Dropdown, { DropdownItem, DropdownMenu, DropdownTrigger } from '@components/atomic/Dropdown';
-import { CreateInvoiceValues } from '../types';
 import ArrowDownIcon from '@assets/icons/ArrowDownIcon';
+import Dropdown, { DropdownItem, DropdownMenu, DropdownTrigger } from '@components/atomic/Dropdown';
+
+// import { CreateInvoiceValues } from '../../types';
 
 const options = [
     { title: 'Invoice', key: 'invoice' },
     { title: 'Tax Invoice', key: 'tax_invoice' },
-    { title: 'Proforma Invoice', key: 'proforma_invoice' },
+    // { title: 'Proforma Invoice', key: 'proforma_invoice' },
 ];
 
 function InvoiceTitle() {
     const [isOpened, setIsOpened] = useState(false);
     const [selectedOption, setSelectedOption] = useState(new Set(['invoice']));
 
-    const { setValue, control } = useFormContext<CreateInvoiceValues>();
+    const { setValue, control } = useFormContext<any>();
     const { title } = useWatch({
         control,
     });
@@ -36,6 +37,7 @@ function InvoiceTitle() {
             <DropdownMenu
                 disallowEmptySelection
                 aria-label="Invoice Type selection"
+                color="default"
                 selectedKeys={selectedOption}
                 selectionMode="single"
                 variant="flat"

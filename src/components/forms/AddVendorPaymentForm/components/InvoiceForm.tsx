@@ -12,7 +12,7 @@ import Totals from "./Totals";
 import AddInvoiceUserModal from "./AddInvoiceUserModal";
 
 type InvoiceFormProps = {
-  setRole: (role: "biller" | "customer") => void;
+  setRole: (role: "biller" | "customer" | "vendor") => void;
   setSelectedUser: any;
 };
 
@@ -33,7 +33,7 @@ function InvoiceForm({ setRole, setSelectedUser }: InvoiceFormProps) {
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div className="col-span-1 space-y-3">
-          <span className="text-md font-semibold">Billed By</span>
+          <span className="text-md font-semibold">Billed To</span>
           <Input
             isRequired
             label=""
@@ -66,7 +66,7 @@ function InvoiceForm({ setRole, setSelectedUser }: InvoiceFormProps) {
           />
         </div>
         <div className="col-span-1 space-y-3">
-          <span className="text-md font-semibold">Billed to</span>
+          <span className="text-md font-semibold">Billed by</span>
           <ChooseCustomer
             addCustomerModal={addCustomerModal}
             editCustomerModal={editCustomerModal}
@@ -77,7 +77,7 @@ function InvoiceForm({ setRole, setSelectedUser }: InvoiceFormProps) {
             isRequired
             label=""
             name="customer.name"
-            placeholder="Customer name"
+            placeholder="Vendor name"
           />
           <Input
             isRequired

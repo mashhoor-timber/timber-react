@@ -61,14 +61,14 @@ export default function AddInvoiceUserModal({
     country: "",
     city: "",
     address: "",
-    role: "customer",
+    role: "vendor",
   };
 
   return (
     <Modal isOpen={isOpen} size="xl" onOpenChange={onClose}>
       <ModalContent>
         <ModalHeader>
-          Add New {userRole === "biller" ? "Biller" : "Customer"}
+          Add New Vendor
         </ModalHeader>
         <Form
           defaultValues={initialValues}
@@ -86,7 +86,7 @@ export default function AddInvoiceUserModal({
                   placeholder="Enter name"
                 />
                 <Spacer y={2} />
-                <Select
+                {/* <Select
                   isRequired
                   name="role"
                   defaultSelectedKeys={["customer"]}
@@ -103,7 +103,7 @@ export default function AddInvoiceUserModal({
                     Vendor
                   </SelectItem>
                 </Select>
-                <Spacer y={2} />
+                <Spacer y={2} /> */}
                 <Input
                   isRequired
                   label="Email"
