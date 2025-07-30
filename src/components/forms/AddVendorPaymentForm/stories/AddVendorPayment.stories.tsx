@@ -11,7 +11,7 @@ const meta: Meta<typeof AddInvoice> = {
     docs: {
       description: {
         component:
-          "A comprehensive vendor payment creation form with customer details, line items, and calculations.",
+          "A comprehensive vendor payment creation form with vendor details, line items, and calculations.",
       },
     },
   },

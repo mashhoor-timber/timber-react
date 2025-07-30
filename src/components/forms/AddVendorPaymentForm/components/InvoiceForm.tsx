@@ -1,27 +1,15 @@
 import DatePicker from "@components/atomic/DatePicker";
 import Input from "@components/atomic/Input";
 import MobileNumberInput from "@components/atomic/MobileNumberInput";
-import SelectInputWithSearch from "@components/atomic/SelectInputWithSearch";
 import { Divider, Spacer, useDisclosure } from "@heroui/react";
 import DropImage from "./DropImage";
 import InvoiceTitle from "./InvoiceTitle";
 import ChooseCustomer from "./ChooseCustomer";
-import InvoiceNumberInput from "./InvoiceNumberInput";
 import CurrencyPicker from "@components/atomic/CurrencyPicker";
 import InvoiceItems from "./InvoiceItems";
 import TermsAndConditions from "./TermsAndConditions";
 import Totals from "./Totals";
 import AddInvoiceUserModal from "./AddInvoiceUserModal";
-
-const uaePlacesOfSupply = [
-  { value: "AB", label: "Abu Dhabi" },
-  { value: "AJ", label: "Ajman" },
-  { value: "DU", label: "Dubai" },
-  { value: "FU", label: "Fujairah" },
-  { value: "RA", label: "Ras Al Khaimah" },
-  { value: "SH", label: "Sharjah" },
-  { value: "UM", label: "Umm Al Quwain" },
-];
 
 type InvoiceFormProps = {
   setRole: (role: "biller" | "customer") => void;
@@ -118,7 +106,12 @@ function InvoiceForm({ setRole, setSelectedUser }: InvoiceFormProps) {
         </div>
         <div className="col-span-1 space-y-3">
           <span className="text-md font-semibold">Invoice Details</span>
-          <InvoiceNumberInput />
+          <Input
+            isRequired
+            label=""
+            name="invoice_number"
+            placeholder="Invoice number"
+          />
           <DatePicker
             disableFutureDates
             isRequired
@@ -152,12 +145,12 @@ function InvoiceForm({ setRole, setSelectedUser }: InvoiceFormProps) {
             placeholder="Select"
             startContent={<span className="text-sm">Currency: </span>}
           />
-          <SelectInputWithSearch
+          {/* <SelectInputWithSearch
             label=""
             name="place_of_supply"
             options={uaePlacesOfSupply}
             placeholder="Select place of supply"
-          />
+          /> */}
         </div>
       </div>
       <Spacer y={6} />
@@ -174,12 +167,12 @@ function InvoiceForm({ setRole, setSelectedUser }: InvoiceFormProps) {
       <Spacer y={3} />
 
       {addCustomerModal.isOpen ? (
-                <AddInvoiceUserModal
-                    isOpen={addCustomerModal.isOpen}
-                    userRole="customer"
-                    onClose={addCustomerModal.onClose}
-                />
-            ) : null}
+        <AddInvoiceUserModal
+          isOpen={addCustomerModal.isOpen}
+          userRole="customer"
+          onClose={addCustomerModal.onClose}
+        />
+      ) : null}
     </>
   );
 }
