@@ -22,7 +22,7 @@ export const AddUserForm: React.FC<AddUserFormProps> = ({
     try {
       const payload: UserFormData = {
         ...values,
-        logo:values.logo?values.logo[0]:null
+        logo: values.logo ? values.logo[0] : null,
       };
       await timberClient.customer.create(payload);
       onSuccess?.();
