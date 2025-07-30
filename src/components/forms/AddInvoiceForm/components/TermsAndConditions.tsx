@@ -114,7 +114,7 @@ function TermsAndConditions() {
           <span className="text-sm font-medium">Terms and Conditions</span>
           <div className="hover:bg-default-100 p-1 rounded-full">
             {!isLoading && (
-              <button onClick={handleEditNotes}>
+              <button onClick={handleEditTerms}>
                 <EditPenIcon
                   className="text-default-500 cursor-pointer"
                   height={16}
