@@ -58,6 +58,15 @@ export default function EditTermsNotesModal({
     enabled: !!timberClient,
   });
 
+  const {mutate} = useMutation({
+    mutationFn: ({ documentId, values }:any) => timberClient.invoiceTemplate.update(documentId, values),
+    onSuccess: () => {
+      toast.success("Invoice template updated successfully");
+      queryClient.invalidateQueries({ queryKey: ["invoiceTemplates"] });
+      onClose();
+    },
+  });
+
   return (
     <Modal isOpen={isOpen} size="xl" onOpenChange={onClose}>
       <ModalContent>
@@ -82,6 +91,8 @@ export default function EditTermsNotesModal({
                 setValue("notes", editorContent);
               }
             }
+           mutate({documentId,values: {...values, content: editorContent}});
+onClose();
           }}
         >
           {() => (

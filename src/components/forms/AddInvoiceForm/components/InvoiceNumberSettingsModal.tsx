@@ -29,7 +29,8 @@ export default function InvoiceNumberSettingsModal({
   const { data: invoiceNumber, isPending: isPendingGetInvoiceNumber } =
     useQuery({
       queryKey: ["invoiceNumber"],
-      queryFn: timberClient.company.get,
+      queryFn:()=> timberClient.invoiceNumber.get(),
+      select: (res: any) => res.data.data,
     });
   console.log(" invoiceNumber:", invoiceNumber);
   console.log(" isPendingGetInvoiceNumber:", isPendingGetInvoiceNumber);
@@ -51,7 +52,7 @@ export default function InvoiceNumberSettingsModal({
     });
     toast.success("Invoice numbering settings updated successfully");
     queryClient.invalidateQueries({ queryKey: ["invoiceNumber"] });
-    queryClient.invalidateQueries({ queryKey: ["nextInvoiceNumber"] });
+    queryClient.invalidateQueries({ queryKey: ["getNextInvoiceNumber"] });
     onClose();
   };
 

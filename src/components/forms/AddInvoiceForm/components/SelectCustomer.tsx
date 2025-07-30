@@ -44,13 +44,6 @@ export default function SelectCustomer({
     select: (res: any) => res.data.data as InvoiceCustomerResponse,
   });
 
-  const { data: invoiceNumber, isPending: isPendingGetInvoiceNumber } =
-    useQuery({
-      queryKey: ["invoiceNumber"],
-      queryFn: () => timberClient.invoiceNumber.get(),
-    });
-  console.log(" invoiceNumber:", invoiceNumber);
-
   // const { data: suggestedCustomersData } = useQuery({
   //   queryKey: ['suggestedCustomers'],
   //     queryFn: () => timberClient.customer.suggestedCustomers(),

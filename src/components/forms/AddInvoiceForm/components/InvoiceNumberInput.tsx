@@ -13,10 +13,13 @@ import { CreateInvoiceValues } from "../types";
 // import InvoiceNumberSettingsModal from "../InvoiceNumberSettingsModal";
 import SettingsIcon from "@assets/icons/SettingsIcon";
 import InvoiceNumberSettingsModal from "./InvoiceNumberSettingsModal";
+import { useTimberClient } from "@providers/TimberProvider";
+import { useQuery } from "@tanstack/react-query";
 
 export default function InvoiceNumberInput() {
   const invoiceNumberSettingsModal = useDisclosure();
   const { control } = useFormContext<CreateInvoiceValues>();
+    const timberClient = useTimberClient();
   const {
     field: { onChange },
   } = useController({
@@ -31,22 +34,25 @@ export default function InvoiceNumberInput() {
     control,
   });
 
-  // const company = useAppSelector(state => state.company);
-  // const { data, isPending, isRefetching } = useQuery({
-  //     queryKey: ['getNextInvoiceNumber', company?._id],
-  //     queryFn: () => getNextInvoiceNumber({ company: company?._id }),
-  //     staleTime: 0,
-  //     enabled: value === 'create',
-  // });
 
-  // useEffect(() => {
-  //     if (!data || value === 'edit') return;
-  //     if (data?.enabled) {
-  //         onChange(data.next_invoice_number);
-  //     } else {
-  //         onChange('', { shouldTouch: false });
-  //     }
-  // }, [data]);
+  const { data, isPending, isRefetching } = useQuery({
+      queryKey: ['getNextInvoiceNumber'],
+      queryFn: () => timberClient.invoiceNumber.next(),
+      select: (res: any) => res.data?.data,
+      staleTime: 0,
+      enabled: value === 'create',
+  });
+
+  console.log(data,"this is the next no")
+
+  useEffect(() => {
+      if (!data || value === 'edit') return;
+      if (data?.enabled) {
+          onChange(data.next_invoice_number);
+      } else {
+          onChange('', { shouldTouch: false });
+      }
+  }, [data]);
 
   return (
     <>
@@ -63,11 +69,11 @@ export default function InvoiceNumberInput() {
           </Button>
         }
         isDisabled={value === "edit"}
-        // isLoading={isPending || isRefetching}
+        isLoading={isPending || isRefetching}
         label=""
         name="invoice_number"
         placeholder="Invoice number"
-        // readOnly={data?.enabled}
+        readOnly={data?.enabled}
         startContent={
           <span className="text-sm whitespace-nowrap">Invoice No: </span>
         }
