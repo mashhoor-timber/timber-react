@@ -68,7 +68,7 @@ function AddInvoice({ onSuccess }: AddInvoiceProps) {
       address: "",
     },
     biller: {
-      biller_id: "",
+      biller_id: company?._id,
       name: company?.name || "",
       email: company?.email || "",
       country_code: company?.country_code || "+971",
