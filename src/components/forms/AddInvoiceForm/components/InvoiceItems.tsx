@@ -104,7 +104,7 @@ export default function InvoiceItems() {
                         id={item.id}
                         index={index}
                         items={fields as NewInvoiceItem[]}
-                        vats={vats?.tax_rates || []}
+                        vats={vats || []}
                         onRemove={() => remove(index)}
                     />
                 ))}
