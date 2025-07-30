@@ -67,7 +67,7 @@ export const AddExpenseForm: React.FC<AddExpenseFormProps> = ({
       >
         {({ formState: { isSubmitting, isValid, isDirty, errors } }) => (
           <div className="space-y-3">
-            {JSON.stringify(errors)}
+            {/* {JSON.stringify(errors)} */}
             <Input isRequired name="type" placeholder="Type" />
             <Spacer y={3} />
             <Input isRequired name="merchant" placeholder="Merchant" />
