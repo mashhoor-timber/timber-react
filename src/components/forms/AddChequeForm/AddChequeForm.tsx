@@ -12,7 +12,7 @@ import { Divider } from "@heroui/react";
 import Button from "@components/atomic/Button";
 
 import FileDisplay from "./components/PdfDropzone/FileDisplay";
-import UploadIcon from "@assets/icons/CalendarIcon";
+import UploadIcon from "@assets/icons/UploadIcon";
 import { AddChequeFormProps } from "./types";
 
 pdfjs.GlobalWorkerOptions.workerSrc =
