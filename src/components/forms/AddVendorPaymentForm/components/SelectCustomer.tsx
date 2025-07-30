@@ -40,7 +40,7 @@ export default function SelectCustomer({
   const timberClient = useTimberClient();
   const { data, isFetching, isError } = useQuery({
     queryKey: ["allInvoiceCustomers"],
-    queryFn: () => timberClient.customer.list({role:'customer'}),
+    queryFn: () => timberClient.customer.list({role:'vendor'}),
     select: (res: any) => res.data.data as InvoiceCustomerResponse,
   });
 

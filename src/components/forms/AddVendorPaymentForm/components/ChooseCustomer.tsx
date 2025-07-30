@@ -5,7 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useTimberClient } from "@providers/TimberProvider";
 
 type Props = {
-  setRole: (role: "biller" | "customer") => void;
+  setRole: (role: "biller" | "customer" | "vendor") => void;
   addCustomerModal: any;
   editCustomerModal: any;
   setSelectedUser: any;
@@ -29,7 +29,7 @@ function ChooseCustomer({
     enabled: !!timberClient,
   });
 
-  const handleAddUser = (userRole: "biller" | "customer") => {
+  const handleAddUser = (userRole: "biller" | "customer" | "vendor") => {
     setRole(userRole);
     addCustomerModal.onOpen();
   };
@@ -47,12 +47,12 @@ function ChooseCustomer({
   };
   return (
     <SelectCustomer
-      buttonOnClick={() => handleAddUser("customer")}
-      buttonText="Add Customer"
+      buttonOnClick={() => handleAddUser("vendor")}
+      buttonText="Add Vendor"
       editOnClick={handleEditUser}
       label=""
       name="customer.customer_id"
-      placeholder="Select saved customer or add new customer"
+      placeholder="Select saved vendor or add new vendor"
       onSelChange={handleCustomerChange}
     />
   );
