@@ -60,10 +60,10 @@ export default function InvoiceNumberSettingsModal({
     next_number: number,
     sequence_length: number
   ) => {
-    const last_invoice_number = `${next_number}`.padStart(
-      sequence_length || 6,
-      "0"
-    );
+    const length = sequence_length || 6;
+    const numStr = `${next_number}`;
+    const last_invoice_number =
+      "0".repeat(Math.max(0, length - numStr.length)) + numStr;
     return `${prefix}${last_invoice_number}`;
   };
 
