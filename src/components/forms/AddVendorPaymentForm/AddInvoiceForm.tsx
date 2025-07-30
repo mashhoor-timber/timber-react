@@ -101,6 +101,7 @@ function AddInvoice({ onSuccess }: AddInvoiceProps) {
     total: 0,
     amount_paid: 0,
     amount_due: 0,
+    status: 'unpaid',
     wafeq: false,
     zoho: false,
     logo: null,
@@ -112,7 +113,7 @@ function AddInvoice({ onSuccess }: AddInvoiceProps) {
       invoice_date: format(values.invoice_date, "yyyy-MM-dd"),
       due_date: format(values.due_date, "yyyy-MM-dd"),
     };
-    await timberClient.vendorPayment.create(payload);
+    const invoice=await timberClient.vendorPayment.create(payload)
     if (onSuccess) onSuccess(payload);
   };
 

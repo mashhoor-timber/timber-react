@@ -60,6 +60,7 @@ export type CreateInvoiceValues = {
     amount_due: number;
     logo: string | null | File;
     place_of_supply?: string;
+    status:'paid'   | 'unpaid';
     wafeq: boolean;
     zoho: boolean;
 };
