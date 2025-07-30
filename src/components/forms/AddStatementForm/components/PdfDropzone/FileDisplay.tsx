@@ -35,7 +35,11 @@ export default function FileDisplay({
     try {
       const fileToUpload = file;
 
-      await timberClient.bankStatement
+      await timberClient.bankStatement.create({
+        file: fileToUpload,
+        progressCallback: (event) => setProgress(event.progress ?? 0),
+        cancelToken: cancelTokenRef.current.token,
+      });
       setFiles([]);
       onSuccess?.();
     } catch (error: any) {
