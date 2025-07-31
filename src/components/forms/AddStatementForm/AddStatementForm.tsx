@@ -130,7 +130,7 @@ export const AddStatementForm: React.FC<AddStatementFormProps> = ({
         isDragActive ? "bg-primary-50" : ""
       }`}
     >
-      <input {...getInputProps()} />
+      <input {...getInputProps()} aria-label={title || "Upload file"}  />
       {renderBody}
     </div>
   );

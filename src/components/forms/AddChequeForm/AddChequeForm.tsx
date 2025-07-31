@@ -130,7 +130,7 @@ export const AddChequeForm: React.FC<AddChequeFormProps> = ({
         isDragActive ? "bg-primary-50" : ""
       }`}
     >
-      <input {...getInputProps()} />
+      <input {...getInputProps()} aria-label={title || "Upload file"} />
       {renderBody}
     </div>
   );
