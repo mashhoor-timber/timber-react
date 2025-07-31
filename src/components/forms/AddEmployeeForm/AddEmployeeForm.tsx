@@ -8,6 +8,7 @@ import Form from "@components/atomic/Form";
 import { useTimberClient } from "providers/TimberProvider";
 import { AddEmployeeFormProps, EmployeeFormData } from "./types";
 import { Spacer } from "@heroui/react";
+import { toast } from "sonner";
 
 export const AddEmployeeForm: React.FC<AddEmployeeFormProps> = ({
   onSuccess,
@@ -35,6 +36,7 @@ export const AddEmployeeForm: React.FC<AddEmployeeFormProps> = ({
       };
       await timberClient.employee.create(employee);
       onSuccess?.();
+      toast.success("Employee added successfully");
     } catch (error) {
       onError?.(error as Error);
     }

@@ -12,6 +12,7 @@ import { CreateInvoiceValues } from "./types";
 import { useTimberClient } from "@providers/TimberProvider";
 import Form from "@components/atomic/Form";
 import { useQuery } from "@tanstack/react-query";
+import { toast } from "sonner";
 
 type AddInvoiceProps = {
   onSuccess?: (values: CreateInvoiceValues) => void;
@@ -113,7 +114,10 @@ function AddInvoice({ onSuccess }: AddInvoiceProps) {
       due_date: format(values.due_date, "yyyy-MM-dd"),
     };
     await timberClient.invoice.create(payload);
-    if (onSuccess) onSuccess(payload);
+    if (onSuccess) {
+      onSuccess(payload);
+      toast.success("Invoice added successfully");
+    }
   };
 
   return (

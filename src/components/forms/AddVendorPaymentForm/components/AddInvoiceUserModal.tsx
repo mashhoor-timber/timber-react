@@ -48,6 +48,7 @@ export default function AddInvoiceUserModal({
       };
       await timberClient.customer.create(payload);
       onSuccess?.();
+      toast.success(`User added successfully`);
     } catch (error) {
       onError?.(error as Error);
     }
@@ -67,9 +68,7 @@ export default function AddInvoiceUserModal({
   return (
     <Modal isOpen={isOpen} size="xl" onOpenChange={onClose}>
       <ModalContent>
-        <ModalHeader>
-          Add New Vendor
-        </ModalHeader>
+        <ModalHeader>Add New Vendor</ModalHeader>
         <Form
           defaultValues={initialValues}
           schema={userSchema}

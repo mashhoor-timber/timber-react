@@ -11,6 +11,7 @@ import Form from "@components/atomic/Form";
 import MobileNumberInput from "@components/atomic/MobileNumberInput";
 import Select, { SelectItem } from "@components/atomic/Select";
 import { useTimberClient } from "@providers/TimberProvider";
+import { toast } from "sonner";
 
 export const AddUserForm: React.FC<AddUserFormProps> = ({
   onSuccess,
@@ -26,6 +27,7 @@ export const AddUserForm: React.FC<AddUserFormProps> = ({
       };
       await timberClient.customer.create(payload);
       onSuccess?.();
+      toast.success("User added successfully");
     } catch (error) {
       onError?.(error as Error);
     }

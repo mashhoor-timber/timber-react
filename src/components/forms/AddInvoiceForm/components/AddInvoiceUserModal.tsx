@@ -48,6 +48,7 @@ export default function AddInvoiceUserModal({
       };
       await timberClient.customer.create(payload);
       onSuccess?.();
+      toast.success(`User added successfully`);
     } catch (error) {
       onError?.(error as Error);
     }

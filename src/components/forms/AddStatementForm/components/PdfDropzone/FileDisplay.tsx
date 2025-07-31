@@ -42,6 +42,7 @@ export default function FileDisplay({
       });
       setFiles([]);
       onSuccess?.();
+      toast.success("Bank Statement added successfully");
     } catch (error: any) {
       const message = error?.response?.data?.message || "Something went wrong";
       toast.error(message);

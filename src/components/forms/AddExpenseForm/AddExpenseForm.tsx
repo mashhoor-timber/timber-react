@@ -14,6 +14,7 @@ import ChooseCategory from "./components/ChooseCategory";
 import AddCategoryModal from "./components/AddCategoryModal";
 import Form from "@components/atomic/Form";
 import { useTimberClient } from "@providers/TimberProvider";
+import { toast } from "sonner";
 
 export const AddExpenseForm: React.FC<AddExpenseFormProps> = ({
   customPaymentMethods,
@@ -47,6 +48,7 @@ export const AddExpenseForm: React.FC<AddExpenseFormProps> = ({
       await timberClient.expense.create(payload);
       setFormKey(Date.now());
       onSuccess?.();
+      toast.success("Expense added successfully");
     } catch (error) {
       onError?.(error as Error);
     }
