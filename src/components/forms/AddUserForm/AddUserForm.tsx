@@ -59,7 +59,7 @@ export const AddUserForm: React.FC<AddUserFormProps> = ({
             name="name"
             placeholder="Enter name"
           />
-          <Spacer y={3} />
+          <Spacer y={6} />
           <Select
             isRequired
             name="role"
@@ -77,21 +77,21 @@ export const AddUserForm: React.FC<AddUserFormProps> = ({
               Vendor
             </SelectItem>
           </Select>
-          <Spacer y={3} />
+          <Spacer y={6} />
           <Input
             isRequired
             label="Email"
             name="email"
             placeholder="Enter email"
           />
-          <Spacer y={3} />
+          <Spacer y={6} />
           <MobileNumberInput
             isRequired
             label="Phone Number"
             nameCode="country_code"
             nameMobile="mobile"
           />
-          <Spacer y={3} />
+          <Spacer y={2} />
           <Textarea
             isRequired
             label="Address"
@@ -99,11 +99,11 @@ export const AddUserForm: React.FC<AddUserFormProps> = ({
             name="address"
             placeholder="Please enter an address"
           />
-          <Spacer y={3} />
+          <Spacer y={6} />
           <Input name="logo" type="file" label="Logo" />
-          <Spacer y={3} />
+          <Spacer y={6} />
           <Input label="TRN" name="trn" placeholder="Enter TRN (if any)" />
-          <Spacer y={3} />
+          <Spacer y={2} />
           <Button color="primary" type="submit" isLoading={isSubmitting}>
             Submit
           </Button>
