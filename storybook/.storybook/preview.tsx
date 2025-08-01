@@ -2,6 +2,7 @@ import { TimberProvider } from "../../src/providers/TimberProvider";
 import { themes } from "storybook/theming";
 import "./style.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Toaster } from "sonner";
 
 let globalApiToken = "";
 
@@ -40,6 +41,7 @@ const decorators = [
 
     return (
       <QueryClientProvider client={queryClient}>
+        <Toaster position="top-right" />
         <TimberProvider config={config}>
           <div
             style={{
