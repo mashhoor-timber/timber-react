@@ -9,3 +9,4 @@ export { AddChequeForm } from "./components/forms/AddChequeForm";
 export { TimberProvider, useTimberConfig } from "./providers/TimberProvider";
 
 export { AddInvoice } from "./components/forms/AddInvoiceForm";
+export { AddVendorInvoice } from "./components/forms/AddVendorPaymentForm";
