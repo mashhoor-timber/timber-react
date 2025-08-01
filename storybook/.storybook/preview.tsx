@@ -40,7 +40,7 @@ const decorators = [
     };
 
     return (
-      <QueryClientProvider client={queryClient}>
+      <>
         <Toaster position="top-right" />
         <TimberProvider config={config}>
           <div
@@ -53,7 +53,7 @@ const decorators = [
             <Story />
           </div>
         </TimberProvider>
-      </QueryClientProvider>
+      </>
     );
   },
 ];

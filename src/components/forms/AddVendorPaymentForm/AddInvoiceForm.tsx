@@ -14,11 +14,11 @@ import Form from "@components/atomic/Form";
 import { useQuery } from "@tanstack/react-query";
 import { toast } from "sonner";
 
-type AddInvoiceProps = {
+type AddVendorInvoiceProps = {
   onSuccess?: (values: CreateInvoiceValues) => void;
 };
 
-function AddInvoice({ onSuccess }: AddInvoiceProps) {
+function AddVendorInvoice({ onSuccess }: AddVendorInvoiceProps) {
   const timberClient = useTimberClient();
 
   const {
@@ -56,7 +56,7 @@ function AddInvoice({ onSuccess }: AddInvoiceProps) {
     return <div>No company data found.</div>;
   }
 
-  const AddInvoiceInitialValues: CreateInvoiceValues = {
+  const AddVendorInvoiceInitialValues: CreateInvoiceValues = {
     mode: "create",
     company: company?._id || "",
     title: "Invoice",
@@ -125,7 +125,7 @@ function AddInvoice({ onSuccess }: AddInvoiceProps) {
 
   return (
     <Form
-      defaultValues={AddInvoiceInitialValues}
+      defaultValues={AddVendorInvoiceInitialValues}
       resetOnSubmit={true}
       schema={invoiceSchema}
       onSubmit={handleSubmit}
@@ -151,6 +151,6 @@ function AddInvoice({ onSuccess }: AddInvoiceProps) {
   );
 }
 
-export default AddInvoice;
+export default AddVendorInvoice;
 
-export { AddInvoice };
+export { AddVendorInvoice };

@@ -1,5 +1,19 @@
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import React, { createContext, useContext, ReactNode, useMemo } from "react";
 import { createClient, TimberClientType } from "timber-node";
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: false,
+      staleTime: 1000 * 60 * 5,
+      refetchOnWindowFocus: false,
+    },
+    mutations: {
+      retry: false,
+    },
+  },
+});
 
 export interface TimberConfig {
   baseUrl?: string;
@@ -27,7 +41,9 @@ export const TimberProvider: React.FC<TimberProviderProps> = ({
   return (
     <TimberConfigContext.Provider value={config}>
       <TimberClientContext.Provider value={timberClient}>
-        {children}
+        <QueryClientProvider client={queryClient}>
+          {children}
+        </QueryClientProvider>
       </TimberClientContext.Provider>
     </TimberConfigContext.Provider>
   );
