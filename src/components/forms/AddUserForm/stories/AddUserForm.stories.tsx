@@ -10,7 +10,7 @@ const meta: Meta<typeof AddUserForm> = {
     docs: {
       description: {
         component:
-          "The AddUserForm component is used to create a new expense. It includes fields for the expense amount, date, category, and description. The form also supports file uploads for receipts and allows users to select a project associated with the expense.",
+          "The AddUserForm component is used to create a new customer, vendor or biller."
       },
     },
   },
@@ -26,7 +26,7 @@ export const Default: Story = {
     docs: {
       description: {
         story:
-          "This is the default state of the AddUserForm. It includes all fields required to create a new expense, such as amount, date, category, description, and project selection. The form is ready for user input.",
+          "This is the default state of the AddUserForm. It includes all fields required to create a new customer, vendor or biller, such as name, email, mobile number, country code, and address. The form is ready for user input.",
       },
     },
   },
