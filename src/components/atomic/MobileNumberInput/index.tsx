@@ -51,8 +51,9 @@ export default function MobileNumberInput({
   return (
     <NextInput
       classNames={{
-        inputWrapper: `h-[42px] shadow-sm border border-divider px-1`,
+        inputWrapper: `h-[42px] shadow-sm border border-divider`,
         label: "font-medium text-sm",
+        
       }}
       defaultValue={defaultNumber}
       errorMessage={error?.message || errorCode?.message}

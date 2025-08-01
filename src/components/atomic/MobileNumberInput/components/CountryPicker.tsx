@@ -28,7 +28,7 @@ export default function CountryPicker({
           innerWrapper: "w-6",
           base: "group bg-background",
           trigger:
-            "disabled shadow-none border-none bg-transparent group-hover:border-transparent ps-0 pe-8 w-fit data-[hover=true]:bg-background w-fit group-data-[focus=true]:bg-background",
+            "disabled shadow-none border-none bg-transparent group-hover:border-transparent ps-0 w-fit data-[hover=true]:bg-background w-fit group-data-[focus=true]:bg-background",
           listbox: "whitespace-nowrap",
           popoverContent: "bg-background w-[250px] scrollbar-thin",
         }}
