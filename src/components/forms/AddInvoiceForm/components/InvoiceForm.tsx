@@ -77,7 +77,7 @@ function InvoiceForm({ setRole, setSelectedUser }: InvoiceFormProps) {
             placeholder="TRN (If any)"
           />
         </div>
-        <div className="col-span-1 space-y-3">
+        <div className="col-span-1 text-center space-y-3">
           <span className="text-md font-semibold">Billed to</span>
           <ChooseCustomer
             addCustomerModal={addCustomerModal}

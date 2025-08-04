@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { AddInvoice } from "..";
+import { AddVendorInvoice } from "..";
 import { toast } from "sonner";
 import { FC } from "react";
 
-const meta: Meta<typeof AddInvoice> = {
+const meta: Meta<typeof AddVendorInvoice> = {
   title: "Forms/AddVendorPayment",
-  component: AddInvoice,
+  component: AddVendorInvoice,
   parameters: {
     layout: "fullscreen",
     docs: {
