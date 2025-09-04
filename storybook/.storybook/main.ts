@@ -53,7 +53,8 @@ const config: StorybookConfig = {
     config.optimizeDeps = config.optimizeDeps || {};
     config.optimizeDeps.include = [
       ...(config.optimizeDeps.include || []),
-      '@tanstack/react-query'
+      '@tanstack/react-query',
+      'sonner'
     ];
 
     // Configure resolve aliases
@@ -65,7 +66,7 @@ const config: StorybookConfig = {
       "@utils": path.resolve(__dirname, "../../src/utils"),
       "@types": path.resolve(__dirname, "../../src/types"),
       // Mock the TimberProvider to avoid React Query dependency in Storybook
-      "@/providers/TimberProvider": path.resolve(__dirname, "./TimberProviderMock"),
+      // "@/providers/TimberProvider": path.resolve(__dirname, "./TimberProviderMock"),
     };
 
     // Ensure proper dependency resolution
