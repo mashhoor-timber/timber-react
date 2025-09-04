@@ -1,6 +1,12 @@
-
-<div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '2rem' }}>
-  <img src="/logo.png" alt="Timber Logo" style={{ height: '32px' }} />
+<div
+  style={{
+    display: "flex",
+    alignItems: "center",
+    gap: "16px",
+    marginBottom: "2rem",
+  }}
+>
+  <img src="/logo.png" alt="Timber Logo" style={{ height: "32px" }} />
 </div>
 
 # Welcome to Timber Component Library for React
@@ -9,18 +15,156 @@
 
 ## 🚀 Getting Started
 
-Timber Component Library is a comprehensive React component library designed to help you build beautiful, functional applications quickly and efficiently. Our components are built with modern React patterns, TypeScript support, and accessibility in mind.
+The Timber Component Library is a comprehensive React component library designed to help you build beautiful, functional applications quickly and efficiently. Our components are built using modern React patterns, TypeScript support, and accessibility best practices.
 
-### Installation
+**💡 Build Tool Recommendation:** We recommend using <a href="https://vite.dev/guide/" target="_blank" rel="noopener noreferrer">Vite</a> as your build tool for React projects. Vite provides lightning-fast development server startup, instant hot module replacement (HMR), and optimized builds, making it an excellent choice for modern React development.
+
+### Installation (use yarn or npm, whichever you prefer)
 
 ```bash
-yarn add timber-react-dev
+yarn add timber-react
+```
+
+OR
+
+```bash
+npm install timber-react
+```
+
+### Required Dependencies (use yarn or npm, whichever you prefer)
+
+Install these packages alongside Timber:
+
+```bash
+yarn add framer-motion@12.23.0
+```
+
+```bash
+yarn add tailwindcss@3.4.13
+```
+
+```bash
+yarn add @heroui/system@2.4.7
+```
+
+```bash
+yarn add @heroui/theme@2.4.6
+```
+
+```bash
+yarn add autoprefixer@10.4.13
+```
+
+### Add tailwind.config.js file to your project root or update the existing one
+
+#### tailwind.config.js
+
+```js
+import { heroui } from '@heroui/theme';
+
+/** @type {import('tailwindcss').Config} */
+
+/** module.exports or export default as per your config */
+module.exports {
+
+  content: [
+    './index.html',
+    './src/**/*.{js,ts,jsx,tsx,mdx}',
+    './node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}',
+    './node_modules/timber-react/**/*.{js,ts,jsx,tsx}',
+  ],
+  theme: {
+    extend: {
+      screens: {
+        xs: '375px',
+      },
+    },
+  },
+
+  darkMode: 'class',
+  plugins: [
+    heroui({
+      prefix: 'timber',
+      themes: {
+        light: {
+          colors: {
+            background: '#ffffff',
+            foreground: '#101010',
+            light: '#FFFFFF',
+            white: '#FFFFFF',
+            divider: '#E8E8E8',
+            primary: {
+              DEFAULT: '#5350F9', // primary color used in components you can update as per your need
+              foreground: '#101010',
+            },
+            secondary: {
+              DEFAULT: '#262467', // secondary color used in components you can update as per your need
+            },
+            success: {
+              DEFAULT: '#20C230',
+              100: '#ECFEED',
+            },
+            danger: {
+              DEFAULT: '#F90000',
+              100: '#FEECED',
+            },
+            warning: {
+              DEFAULT: '#FF7A1A',
+              100: '#FFE7D5',
+              600: '#FF7A1A',
+            },
+            greyed: {
+              DEFAULT: '#757575',
+              100: '#ECECEC',
+            },
+            info: '#0294FF',
+            violet: '#5350F9',
+            pink: '#E84187',
+            focus: '#0094ff',
+          },
+        },
+        dark: {
+          colors: {
+            background: '#3f3f46',
+            foreground: '#f8f8f8',
+            light: '#000000',
+            white: '#000000',
+            divider: '#5d5d5d',
+            primary: {
+              DEFAULT: '#0094ff',
+              foreground: '#101010',
+            },
+            secondary: {
+              DEFAULT: '#0094ff',
+            },
+            danger: '#C22020',
+            focus: '#0094ff',
+          },
+        },
+      },
+    }),
+  ],
+}
+```
+
+### Add postcss.config.js file to your project root or update the existing one
+
+#### postcss.config.js
+
+```js
+// module.exports or export default as per your config
+module.exports = {
+  plugins: {
+    tailwindcss: {},
+    autoprefixer: {},
+  },
+};
 ```
 
 ### Usage
 
 ```tsx
-import { TimberProvider, AddExpenseForm } from 'timber-react-dev';
+import { TimberProvider, AddExpenseForm } from 'timber-react';
 
 const config = {
     apiKey: <api_key_here>
@@ -40,8 +184,9 @@ function App() {
 ## 📦 Component Categories
 
 ### 📋 Form Components
+
 - **Add Expense Form** - Complete expense entry form
-- **Add User Form** - User registration/creation form
+- **Add User Form** - Customer, biller, and vendor creation form
 - **Add Employee Form** - Employee information form
 - **Add Statement Form** - Financial statement form
 - **Add Cheque Form** - Cheque details form
@@ -50,34 +195,75 @@ function App() {
 
 ---
 
-## 🎨 Features
+## 🎨 Key Features
 
-<div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1.5rem', margin: '2rem 0' }}>
-  <div style={{ padding: '1.5rem', border: '1px solidrgb(2, 2, 2)', borderRadius: '8px', backgroundColor: '#F7FAFC' }}>
-    <h3 style={{ margin: '0 0 1rem 0', color: '#2D3748' }}>🎯 TypeScript First</h3>
-    <p style={{ margin: 0, color: '#4A5568' }}>
-      Built with TypeScript for better developer experience and type safety.
+<div
+  style={{
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
+    gap: "1.5rem",
+    margin: "2rem 0",
+  }}
+>
+  <div
+    style={{
+      padding: "1.5rem",
+      border: "1px solid #E2E8F0",
+      borderRadius: "8px",
+      backgroundColor: "#F7FAFC",
+    }}
+  >
+   <h3 style={{ margin: "0 0 1rem 0", color: "#2D3748" }}>
+      🎯 TypeScript First
+    </h3>
+    <p style={{ margin: 0, color: "#4A5568" }}>
+      Built with TypeScript to provide an enhanced developer experience with complete type safety.
     </p>
   </div>
-  
-  <div style={{ padding: '1.5rem', border: '1px solid #E2E8F0', borderRadius: '8px', backgroundColor: '#F7FAFC' }}>
-    <h3 style={{ margin: '0 0 1rem 0', color: '#2D3748' }}>♿ Accessible</h3>
-    <p style={{ margin: 0, color: '#4A5568' }}>
-      Components follow WCAG guidelines for accessibility and keyboard navigation.
-    </p>
-  </div>
-  
-  <div style={{ padding: '1.5rem', border: '1px solid #E2E8F0', borderRadius: '8px', backgroundColor: '#F7FAFC' }}>
-    <h3 style={{ margin: '0 0 1rem 0', color: '#2D3748' }}>🎨 Customizable</h3>
-    <p style={{ margin: 0, color: '#4A5568' }}>
-      Easy to customize with CSS variables and theming support.
-    </p>
-  </div>
-  
-  <div style={{ padding: '1.5rem', border: '1px solid #E2E8F0', borderRadius: '8px', backgroundColor: '#F7FAFC' }}>
-    <h3 style={{ margin: '0 0 1rem 0', color: '#2D3748' }}>📱 Responsive</h3>
-    <p style={{ margin: 0, color: '#4A5568' }}>
-      Mobile-first design with responsive layouts out of the box.
+
+<div
+  style={{
+    padding: "1.5rem",
+    border: "1px solid #E2E8F0",
+    borderRadius: "8px",
+    backgroundColor: "#F7FAFC",
+  }}
+>
+  <h3 style={{ margin: "0 0 1rem 0", color: "#2D3748" }}>♿ Accessible</h3>
+  <p style={{ margin: 0, color: "#4A5568" }}>
+    All components follow WCAG guidelines for accessibility and support full
+    keyboard navigation.
+  </p>
+</div>
+
+<div
+  style={{
+    padding: "1.5rem",
+    border: "1px solid #E2E8F0",
+    borderRadius: "8px",
+    backgroundColor: "#F7FAFC",
+  }}
+>
+  <h3 style={{ margin: "0 0 1rem 0", color: "#2D3748" }}>
+    🎨 Highly Customizable
+  </h3>
+  <p style={{ margin: 0, color: "#4A5568" }}>
+    Easily customize components using CSS variables and comprehensive theming
+    support.
+  </p>
+</div>
+
+  <div
+    style={{
+      padding: "1.5rem",
+      border: "1px solid #E2E8F0",
+      borderRadius: "8px",
+      backgroundColor: "#F7FAFC",
+    }}
+  >
+    <h3 style={{ margin: "0 0 1rem 0", color: "#2D3748" }}>📱 Mobile-First Responsive</h3>
+    <p style={{ margin: 0, color: "#4A5568" }}>
+      Built with a mobile-first approach featuring responsive layouts that work seamlessly across all devices.
     </p>
   </div>
 </div>
@@ -86,61 +272,70 @@ function App() {
 
 ## 📚 Documentation
 
-Navigate through the sidebar to explore individual components. Each component includes:
+Navigate through the sidebar to explore individual components. Each component page includes:
 
-- **Props documentation** - Complete API reference
-- **Interactive examples** - Live component playground
-- **Usage patterns** - Common implementation scenarios
-- **Accessibility notes** - WCAG compliance information
+- **Complete Props Documentation** - Comprehensive API reference
+- **Interactive Examples** - Live component playground for testing
+- **Usage Patterns** - Common implementation scenarios and best practices
+- **Accessibility Guidelines** - WCAG compliance information and keyboard navigation details
 
 ---
 
-## 🛠️ Development
+## 🛠️ Development Requirements
 
 ### Prerequisites
-- Node.js 16+ 
-- Yarn package manager
 
-### Local Development
-```bash
-# Install dependencies
-yarn install
-
-# Start Storybook
-yarn storybook
-
-# Build library
-yarn build
-```
-
----
+- Node.js 18 or higher
+- Yarn package manager (recommended)
 
 ## 🤝 Contributing
 
-We welcome contributions! Please see our [GitHub repository](https://github.com/mashhoor-timber/timber-react) for guidelines.
+We welcome contributions from the community! Please visit our <a href="https://github.com/Timber-UAE/frontend-sdk" target="_blank" rel="noopener noreferrer">GitHub repository</a> for detailed contribution guidelines and development setup instructions.
 
 ---
 
 ## 📄 License
 
-MIT License - see LICENSE file for details.
+This project is licensed under the MIT License - see the LICENSE file for complete details.
 
 ---
 
-<div style={{ textAlign: 'center', padding: '2rem', backgroundColor: '#F7FAFC', borderRadius: '8px', marginTop: '2rem' }}>
-  <h3 style={{ margin: '0 0 1rem 0', color: '#2D3748' }}>Ready to get started?</h3>
-  <p style={{ margin: '0 0 1rem 0', color: '#4A5568' }}>
-    Explore the components in the sidebar or check out our complete documentation.
+<div
+  style={{
+    textAlign: "center",
+    padding: "2rem",
+    backgroundColor: "#F7FAFC",
+    borderRadius: "8px",
+    marginTop: "2rem",
+  }}
+>
+  <h3 style={{ margin: "0 0 1rem 0", color: "#2D3748" }}>
+    Ready to Get Started?
+  </h3>
+  <p style={{ margin: "0 0 1rem 0", color: "#4A5568" }}>
+    Explore the components using the sidebar navigation or check out our
+    complete documentation for detailed implementation guides.
   </p>
-  <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-    <a href="https://github.com/mashhoor-timber/timber-react" style={{ 
-      padding: '0.5rem 1rem', 
-      backgroundColor: '#3182CE', 
-      color: 'white', 
-      textDecoration: 'none', 
-      borderRadius: '6px',
-      fontWeight: 'bold'
-    }}>
+  <div
+    style={{
+      display: "flex",
+      gap: "1rem",
+      justifyContent: "center",
+      flexWrap: "wrap",
+    }}
+  >
+    <a
+      href="https://github.com/Timber-UAE/frontend-sdk"
+      target="_blank"
+      style={{
+        padding: "0.5rem 1rem",
+        backgroundColor: "#3182CE",
+        color: "white",
+        textDecoration: "none",
+        borderRadius: "6px",
+        fontWeight: "bold",
+      }}
+    >
       View on GitHub
     </a>
   </div>

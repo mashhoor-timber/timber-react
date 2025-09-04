@@ -1,6 +1,6 @@
-import { dirname, join } from "path";
+import {dirname, join} from "path";
 import remarkGfm from "remark-gfm";
-import type { StorybookConfig } from "@storybook/react-vite";
+import type {StorybookConfig} from "@storybook/react-vite";
 import path from "path";
 
 const config: StorybookConfig = {
@@ -25,7 +25,7 @@ const config: StorybookConfig = {
         },
       },
     },
-    "./addons/react-strict-mode/register",
+    "./addons/react-strict-mode/register"
   ],
 
   framework: {
@@ -42,30 +42,6 @@ const config: StorybookConfig = {
   },
 
   async viteFinal(config) {
-    // Configure build options to properly handle @tanstack/react-query
-    config.build = config.build || {};
-    config.build.rollupOptions = config.build.rollupOptions || {};
-
-    // Reset external to empty array to ensure nothing gets externalized inappropriately
-    config.build.rollupOptions.external = [
-      ...(Array.isArray(config.build.rollupOptions.external)
-        ? config.build.rollupOptions.external
-        : []),
-      "sonner",
-    ];
-    // Configure dependency optimization
-    config.optimizeDeps = config.optimizeDeps || {};
-    config.optimizeDeps.include = [
-      ...(config.optimizeDeps.include || []),
-      // "@heroui/react",
-      "@tanstack/react-query",
-      "react-dropzone",
-      "sonner",
-      "date-fns",
-      "uuid",
-    ];
-
-    // Configure resolve aliases
     config.resolve = config.resolve || {};
     config.resolve.alias = {
       ...config.resolve.alias,
@@ -73,24 +49,8 @@ const config: StorybookConfig = {
       "@hooks": path.resolve(__dirname, "../../src/hooks"),
       "@utils": path.resolve(__dirname, "../../src/utils"),
       "@types": path.resolve(__dirname, "../../src/types"),
-      "@providers/TimberProvider": path.resolve(
-        __dirname,
-        "./TimberProviderMock"
-      ),
-      "providers/TimberProvider": path.resolve(
-        __dirname,
-        "./TimberProviderMock"
-      ),
-      "react-dropzone": path.resolve(__dirname, "./stubs/react-dropzone.ts"),
-      "react-pdf": path.resolve(__dirname, "./stubs/react-pdf.ts"),
-      "@heroui/react": path.resolve(__dirname, "./stubs/heroui-react.ts"),
-      "date-fns": path.resolve(__dirname, "./stubs/date-fns.ts"),
     };
-
-    // Ensure proper dependency resolution
-    config.define = config.define || {};
-    config.define.global = "globalThis";
-
+    
     return config;
   },
 };

@@ -1,4 +1,4 @@
-import { defineConfig } from "vite";
+import {defineConfig} from "vite";
 import react from "@vitejs/plugin-react";
 import path from "path";
 
@@ -15,19 +15,6 @@ export default defineConfig({
     },
   },
   optimizeDeps: {
-    include: [
-      "@storybook/theming",
-      "@mdx-js/react",
-      "@tanstack/react-query",
-      "sonner",
-      "framer-motion",
-      "@heroui/system",
-      "@heroui/theme",
-    ],
-  },
-  build: {
-    rollupOptions: {
-      external: () => false, // Don't externalize any dependencies
-    },
+    include: ["@storybook/theming", "@mdx-js/react"],
   },
 });

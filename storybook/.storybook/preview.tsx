@@ -1,8 +1,8 @@
+import { TimberProvider } from "../../src/providers/TimberProvider";
 import { themes } from "storybook/theming";
 import "./style.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "sonner";
-import { TimberProvider } from "./providers/TimberProviderMock";
 
 let globalApiToken = "";
 
