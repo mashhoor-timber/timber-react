@@ -56,7 +56,8 @@ const config: StorybookConfig = {
     // Configure dependency optimization
     config.optimizeDeps = config.optimizeDeps || {};
     config.optimizeDeps.include = [
-      ...(config.optimizeDeps.include || []),"@heroui/react",
+      ...(config.optimizeDeps.include || []),
+      "@heroui/react",
       "@tanstack/react-query",
       "react-dropzone",
       "sonner",
@@ -78,6 +79,7 @@ const config: StorybookConfig = {
         __dirname,
         "./TimberProviderMock"
       ),
+      "react-dropzone": path.resolve(__dirname, "./stubs/react-dropzone.ts"),
     };
 
     // Ensure proper dependency resolution
