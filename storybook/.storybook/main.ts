@@ -42,19 +42,21 @@ const config: StorybookConfig = {
   },
 
   async viteFinal(config) {
+    // Configure build options to properly handle @tanstack/react-query
     config.build = config.build || {};
     config.build.rollupOptions = config.build.rollupOptions || {};
-    config.build.rollupOptions.external =
-      config.build.rollupOptions.external || [];
-
-    // Make sure @tanstack/react-query is not in external dependencies
-    if (Array.isArray(config.build.rollupOptions.external)) {
-      config.build.rollupOptions.external =
-        config.build.rollupOptions.external.filter(
-          (dep) => dep !== "@tanstack/react-query"
-        );
-    }
     
+    // Reset external to empty array to ensure nothing gets externalized inappropriately
+    config.build.rollupOptions.external = [];
+    
+    // Configure dependency optimization
+    config.optimizeDeps = config.optimizeDeps || {};
+    config.optimizeDeps.include = [
+      ...(config.optimizeDeps.include || []),
+      '@tanstack/react-query'
+    ];
+
+    // Configure resolve aliases
     config.resolve = config.resolve || {};
     config.resolve.alias = {
       ...config.resolve.alias,
@@ -62,7 +64,13 @@ const config: StorybookConfig = {
       "@hooks": path.resolve(__dirname, "../../src/hooks"),
       "@utils": path.resolve(__dirname, "../../src/utils"),
       "@types": path.resolve(__dirname, "../../src/types"),
+      // Mock the TimberProvider to avoid React Query dependency in Storybook
+      "@/providers/TimberProvider": path.resolve(__dirname, "./TimberProviderMock"),
     };
+
+    // Ensure proper dependency resolution
+    config.define = config.define || {};
+    config.define.global = 'globalThis';
 
     return config;
   },
