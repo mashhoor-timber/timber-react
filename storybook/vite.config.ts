@@ -19,9 +19,10 @@ export default defineConfig({
       "@storybook/theming",
       "@mdx-js/react",
       "@tanstack/react-query", // ✅ Force bundling react-query
+      "sonner", // ✅ Force bundling sonner
     ],
   },
   ssr: {
-    noExternal: ["@tanstack/react-query"], // ✅ Important for Storybook/Vite SSR
+    noExternal: ["@tanstack/react-query", "sonner"], // ✅ Important for Storybook/Vite SSR
   },
 });

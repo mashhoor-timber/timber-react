@@ -57,12 +57,13 @@ const config: StorybookConfig = {
       include: [
         ...(config.optimizeDeps?.include || []),
         "@tanstack/react-query",
+        "sonner"
       ],
     };
-    
+
     config.ssr = {
       ...(config.ssr || {}),
-      noExternal: ["@tanstack/react-query"],
+      noExternal: ["@tanstack/react-query", "sonner"],
     };
 
     return config;
