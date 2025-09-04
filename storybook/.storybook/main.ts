@@ -1,6 +1,6 @@
-import {dirname, join} from "path";
+import { dirname, join } from "path";
 import remarkGfm from "remark-gfm";
-import type {StorybookConfig} from "@storybook/react-vite";
+import type { StorybookConfig } from "@storybook/react-vite";
 import path from "path";
 
 const config: StorybookConfig = {
@@ -25,7 +25,7 @@ const config: StorybookConfig = {
         },
       },
     },
-    "./addons/react-strict-mode/register"
+    "./addons/react-strict-mode/register",
   ],
 
   framework: {
@@ -50,12 +50,21 @@ const config: StorybookConfig = {
       "@utils": path.resolve(__dirname, "../../src/utils"),
       "@types": path.resolve(__dirname, "../../src/types"),
     };
-    
+
+    // ✅ Ensure @tanstack/react-query is bundled
+    config.optimizeDeps = {
+      ...(config.optimizeDeps || {}),
+      include: [
+        ...(config.optimizeDeps?.include || []),
+        "@tanstack/react-query",
+      ],
+    };
+
     return config;
   },
 };
 
-function getAbsolutePath(value) {
+function getAbsolutePath(value: string) {
   return dirname(require.resolve(join(value, "package.json")));
 }
 
