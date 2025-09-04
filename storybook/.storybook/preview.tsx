@@ -1,4 +1,4 @@
-import { TimberProvider } from "../../src/providers/TimberProvider";
+import { TimberProvider } from "../providers/TimberProvider";
 import { themes } from "storybook/theming";
 import "./style.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
