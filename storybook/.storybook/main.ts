@@ -45,16 +45,15 @@ const config: StorybookConfig = {
     // Configure build options to properly handle @tanstack/react-query
     config.build = config.build || {};
     config.build.rollupOptions = config.build.rollupOptions || {};
-    
+
     // Reset external to empty array to ensure nothing gets externalized inappropriately
     config.build.rollupOptions.external = [];
-    
+
     // Configure dependency optimization
     config.optimizeDeps = config.optimizeDeps || {};
     config.optimizeDeps.include = [
       ...(config.optimizeDeps.include || []),
-      '@tanstack/react-query',
-      'sonner'
+      "@tanstack/react-query",
     ];
 
     // Configure resolve aliases
@@ -66,12 +65,15 @@ const config: StorybookConfig = {
       "@utils": path.resolve(__dirname, "../../src/utils"),
       "@types": path.resolve(__dirname, "../../src/types"),
       // Mock the TimberProvider to avoid React Query dependency in Storybook
-      // "@/providers/TimberProvider": path.resolve(__dirname, "./TimberProviderMock"),
+      "@/providers/TimberProvider": path.resolve(
+        __dirname,
+        "./TimberProviderMock"
+      ),
     };
 
     // Ensure proper dependency resolution
     config.define = config.define || {};
-    config.define.global = 'globalThis';
+    config.define.global = "globalThis";
 
     return config;
   },
