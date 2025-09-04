@@ -62,6 +62,7 @@ const config: StorybookConfig = {
       "react-dropzone",
       "sonner",
       "date-fns",
+      "uuid",
     ];
 
     // Configure resolve aliases
