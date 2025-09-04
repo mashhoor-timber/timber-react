@@ -81,6 +81,7 @@ const config: StorybookConfig = {
       ),
       "react-dropzone": path.resolve(__dirname, "./stubs/react-dropzone.ts"),
       "react-pdf": path.resolve(__dirname, "./stubs/react-pdf.ts"),
+      "@heroui/react": path.resolve(__dirname, "./stubs/heroui-react.ts"),
     };
 
     // Ensure proper dependency resolution
