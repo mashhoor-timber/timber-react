@@ -56,8 +56,7 @@ const config: StorybookConfig = {
     // Configure dependency optimization
     config.optimizeDeps = config.optimizeDeps || {};
     config.optimizeDeps.include = [
-      ...(config.optimizeDeps.include || []),
-      "@heroui/react",
+      ...(config.optimizeDeps.include || []),"@heroui/react",
       "@tanstack/react-query",
       "react-dropzone",
       "sonner",
