@@ -1,4 +1,4 @@
-import { defineConfig } from "vite";
+import {defineConfig} from "vite";
 import react from "@vitejs/plugin-react";
 import path from "path";
 
@@ -15,14 +15,6 @@ export default defineConfig({
     },
   },
   optimizeDeps: {
-    include: [
-      "@storybook/theming",
-      "@mdx-js/react",
-      "@tanstack/react-query", // ✅ Force bundling react-query
-      "sonner", // ✅ Force bundling sonner
-    ],
-  },
-  ssr: {
-    noExternal: ["@tanstack/react-query", "sonner"], // ✅ Important for Storybook/Vite SSR
+    include: ["@storybook/theming", "@mdx-js/react"],
   },
 });
