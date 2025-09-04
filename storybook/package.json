@@ -31,7 +31,8 @@
     "sonner": "^2.0.5",
     "@tanstack/react-query": "^5.81.5",
     "react-dropzone": "^14.3.8",
-    "react-pdf": "9.1.0"
+    "react-pdf": "9.1.0",
+    "date-fns": "^2.0.0"
   },
   "devDependencies": {
     "@storybook/addon-a11y": "^9.0.15",
