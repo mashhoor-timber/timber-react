@@ -1,7 +1,7 @@
+import React from "react";
 import { TimberProvider } from "../providers/TimberProvider";
 import { themes } from "storybook/theming";
 import "./style.css";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "sonner";
 
 let globalApiToken = "";
@@ -9,19 +9,6 @@ let globalApiToken = "";
 if (typeof window !== "undefined") {
   globalApiToken = localStorage.getItem("storybook-api-token") || "";
 }
-
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      retry: false,
-      staleTime: 1000 * 60 * 5,
-      refetchOnWindowFocus: false,
-    },
-    mutations: {
-      retry: false,
-    },
-  },
-});
 
 const decorators = [
   (Story, context) => {
