@@ -1,6 +1,6 @@
-import {dirname, join} from "path";
+import { dirname, join } from "path";
 import remarkGfm from "remark-gfm";
-import type {StorybookConfig} from "@storybook/react-vite";
+import type { StorybookConfig } from "@storybook/react-vite";
 import path from "path";
 
 const config: StorybookConfig = {
@@ -25,7 +25,7 @@ const config: StorybookConfig = {
         },
       },
     },
-    "./addons/react-strict-mode/register"
+    "./addons/react-strict-mode/register",
   ],
 
   framework: {
@@ -49,8 +49,9 @@ const config: StorybookConfig = {
       "@hooks": path.resolve(__dirname, "../../src/hooks"),
       "@utils": path.resolve(__dirname, "../../src/utils"),
       "@types": path.resolve(__dirname, "../../src/types"),
+      "@providers": path.resolve(__dirname, "../../src/providers"),
     };
-    
+
     return config;
   },
 };
