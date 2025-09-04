@@ -61,6 +61,7 @@ const config: StorybookConfig = {
       "@tanstack/react-query",
       "react-dropzone",
       "sonner",
+      "date-fns",
     ];
 
     // Configure resolve aliases
