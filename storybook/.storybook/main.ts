@@ -80,6 +80,7 @@ const config: StorybookConfig = {
         "./TimberProviderMock"
       ),
       "react-dropzone": path.resolve(__dirname, "./stubs/react-dropzone.ts"),
+      "react-pdf": path.resolve(__dirname, "./stubs/react-pdf.ts"),
     };
 
     // Ensure proper dependency resolution
