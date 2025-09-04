@@ -47,13 +47,18 @@ const config: StorybookConfig = {
     config.build.rollupOptions = config.build.rollupOptions || {};
 
     // Reset external to empty array to ensure nothing gets externalized inappropriately
-    config.build.rollupOptions.external = [];
-
+    config.build.rollupOptions.external = [
+      ...(Array.isArray(config.build.rollupOptions.external)
+        ? config.build.rollupOptions.external
+        : []),
+      "sonner",
+    ];
     // Configure dependency optimization
     config.optimizeDeps = config.optimizeDeps || {};
     config.optimizeDeps.include = [
       ...(config.optimizeDeps.include || []),
       "@tanstack/react-query",
+      "sonner",
     ];
 
     // Configure resolve aliases
