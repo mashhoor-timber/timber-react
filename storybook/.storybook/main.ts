@@ -59,6 +59,11 @@ const config: StorybookConfig = {
         "@tanstack/react-query",
       ],
     };
+    
+    config.ssr = {
+      ...(config.ssr || {}),
+      noExternal: ["@tanstack/react-query"],
+    };
 
     return config;
   },
