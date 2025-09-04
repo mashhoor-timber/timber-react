@@ -1,6 +1,6 @@
-import {dirname, join} from "path";
+import { dirname, join } from "path";
 import remarkGfm from "remark-gfm";
-import type {StorybookConfig} from "@storybook/react-vite";
+import type { StorybookConfig } from "@storybook/react-vite";
 import path from "path";
 
 const config: StorybookConfig = {
@@ -25,7 +25,7 @@ const config: StorybookConfig = {
         },
       },
     },
-    "./addons/react-strict-mode/register"
+    "./addons/react-strict-mode/register",
   ],
 
   framework: {
@@ -42,6 +42,19 @@ const config: StorybookConfig = {
   },
 
   async viteFinal(config) {
+    config.build = config.build || {};
+    config.build.rollupOptions = config.build.rollupOptions || {};
+    config.build.rollupOptions.external =
+      config.build.rollupOptions.external || [];
+
+    // Make sure @tanstack/react-query is not in external dependencies
+    if (Array.isArray(config.build.rollupOptions.external)) {
+      config.build.rollupOptions.external =
+        config.build.rollupOptions.external.filter(
+          (dep) => dep !== "@tanstack/react-query"
+        );
+    }
+    
     config.resolve = config.resolve || {};
     config.resolve.alias = {
       ...config.resolve.alias,
@@ -50,7 +63,7 @@ const config: StorybookConfig = {
       "@utils": path.resolve(__dirname, "../../src/utils"),
       "@types": path.resolve(__dirname, "../../src/types"),
     };
-    
+
     return config;
   },
 };
