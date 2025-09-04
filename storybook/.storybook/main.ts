@@ -58,6 +58,7 @@ const config: StorybookConfig = {
     config.optimizeDeps.include = [
       ...(config.optimizeDeps.include || []),
       "@tanstack/react-query",
+      "react-dropzone",
       "sonner",
     ];
 
