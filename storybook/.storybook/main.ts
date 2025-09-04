@@ -69,8 +69,11 @@ const config: StorybookConfig = {
       "@hooks": path.resolve(__dirname, "../../src/hooks"),
       "@utils": path.resolve(__dirname, "../../src/utils"),
       "@types": path.resolve(__dirname, "../../src/types"),
-      // Mock the TimberProvider to avoid React Query dependency in Storybook
-      "@/providers/TimberProvider": path.resolve(
+      "@providers/TimberProvider": path.resolve(
+        __dirname,
+        "./TimberProviderMock"
+      ),
+      "providers/TimberProvider": path.resolve(
         __dirname,
         "./TimberProviderMock"
       ),
