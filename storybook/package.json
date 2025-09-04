@@ -23,6 +23,7 @@
     "start": "dlx http-server storybook-static"
   },
   "dependencies": {
+    "@heroui/react": "2.6.14",
     "react": "18.3.0",
     "react-dom": "18.3.0",
     "sonner": "^2.0.5",
